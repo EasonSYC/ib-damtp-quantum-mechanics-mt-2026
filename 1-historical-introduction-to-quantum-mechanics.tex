@@ -19,14 +19,14 @@ Waves are
     \item described using a function \(f\pqty{\vb{x}, t}\) which is periodic in \(t\) or \(\vb{x}\),
     \item obeying the wave equation (second-order PDE) \(\pdv[2]{f\pqty{\vb{x}, t}}{t} - c^2 \laplacian f\pqty{\vb{x}, t} = 0\),
     \item with solutions as superposition of
-    \[
+    \begin{equation}
         f_{\pm} \pqty{\vb{x}, t} = A \exp\pqty{i \pqty{\pm \vb{k} \vdot \vb{x} - \omega t}}
-    \]
+    \end{equation}
     where \(A \in \CC, \vb{k} \in \RR^3\) and \(\omega \in \RR\) are constants,
     \item solutions obey dispersion \(\boxed{\omega = c \abs{\vb{k}}}\) where \(\omega\) is the \emph{angular frequency} which is related to \(\lambda\), the \emph{wavelength}, and the frequency \(\nu\), by
-    \[
+    \begin{equation}
         \omega = 2\pi \nu = \frac{2\pi c}{\lambda},
-    \]
+    \end{equation}
     \item and waves interfere with each other, by constructive or destructive interference.
 \end{itemize}
 
@@ -60,22 +60,22 @@ However, we observed the following.
 \end{enumerate}
 
 In 1905, Einstein proposed that light comes in small quanta, which are called \term{photons} \Pphoton, and each quantum of light carries an energy given by
-\[
+\begin{equation}
     E = \hbar \omega = h \nu
-\]
+\end{equation}
 where \(\hbar = \flatfrac{h}{2\pi}\), and \(h\) is the \term{Planck constant} with value \(h \approx \SI{6.6e-34}{\joule\second}\), and momentum given by
-\[
+\begin{equation}
     \vb{p} = \hbar \vb{k}.
-\]
+\end{equation}
 
 Simply by assuming the conservation of energy, this explains this phenomena: in particular, the \term{threshold frequency} is therefore
-\[
+\begin{equation}
     E_{\min} = 0 = \hbar \omega_{\min} - \phi
-\]
+\end{equation}
 where \(\phi\) is the \term{binding energy} of the electrons. This explains the corresponding observations.
 \begin{enumerate}
     \item If we are below \(\omega_{\min} = \flatfrac{\phi}{\hbar}\), no electrons may escape the piece of metal.
-    \item The kinetic energy of escaping \Pelectron is given by \(E = \hbar \omega - \phi\) for \(\omega > \omega_{\min}\).
+    \item The kinetic energy of escaping \Pelectron is given by \(\boxed{E = \hbar \omega - \phi}\) for \(\omega > \omega_{\min}\).
     \item We also understand that the larger the intensity \(I\), the more light quanta we have, and hence the more scattering events with \Pelectron, hence a higher emission rate.
 \end{enumerate}
 
@@ -96,59 +96,59 @@ The Rutherford model (1908), illustrated in \autoref{fig:rutherford-model}, sugg
     \item The \Pelectron on orbits around nucleus would radiate energy.
     \item The \Pelectron would collapse, eventually, onto the nucleus.
     \item Experimentally measured atomic spectra were discrete. In particular, light emitted by atoms when hit by light was described by a set of lines
-    \[
+    \begin{equation}
         \omega_{mn} = 2 \pi c R_0 \pqty{\frac{1}{n^2} - \frac{1}{m^2}},
-    \]
+    \end{equation}
     where \(R_0\) is the \term{Rydberg constant}.
 \end{enumerate}
 
 Bohr explained these evidence using a simple postulate, that the orbitals angular momentum may only take discrete values, given by
-\[
+\begin{equation}
     L_n = \hbar n, \quad n \in \NN.
-\]
+\end{equation}
 
 This quantisation of \(L\) explains the quantisation of \(r, v\) and \(E\) as follows for a hydrogen atom.
 
 Assuming a circular orbit, we have \(L = m_{\Pe} v r\), and hence \(v = \flatfrac{L}{m_{\Pe} r}\). Putting the postulate in, this leads to
-\[
+\begin{equation}
     v_n = \frac{n \hbar}{m_{\Pe} r}.
-\]
+\end{equation}
 
 From the Coulomb force, we have
-\[
+\begin{equation}
     \frac{e^2}{4 \pi \epsilon_0} \frac{1}{r^2} = m_{\Pe} \frac{v^2}{r}
-\]
+\end{equation}
 and hence
-\[
+\begin{equation}
     r_n = \frac{4 \pi \epsilon_0}{m_{\Pe} e^2} n^2 \hbar^2.
-\]
+\end{equation}
 
 In particular, this predicts the minimal radius of electron orbit, the \term{Bohr radius}, given by
-\[
+\begin{equation}
     r_1 = \frac{4 \pi \epsilon_0}{m_{\Pe} e^2} \hbar^2.
-\]
+\end{equation}
 
 Furthermore, we have quantised energy, given by
-\[
+\begin{equation}
     E_n = \frac{1}{2} m_{\Pe} v_n^2 - \frac{e^2}{4 \pi \epsilon_0} \frac{1}{r_n} = - \frac{e^2}{8 \pi \epsilon_0 r_1} \frac{1}{n^2}.
-\]
+\end{equation}
 
 When an electron drops from a higher level to a lower level, we have
-\[
+\begin{equation}
     \hbar \omega_{mn} = E_m - E_n
-\]
+\end{equation}
 and hence
-\[
+\begin{equation}
     \omega_{mn} = \frac{m_{\Pe} c^2 \alpha^2}{2\hbar}\left(\frac{1}{n^2}-\frac{1}{m^2}\right)
-\]
+\end{equation}
 where \(\alpha\) is the (dimensionless) \term{fine structure constant}, given by
-\[
+\begin{equation}
     \alpha = \frac{e^2}{4 \pi \epsilon_0 \hbar c} \approx \frac{1}{137},
-\]
+\end{equation}
 and we recover \(R_0\) identical to experimental evidence, namely
-\[
+\begin{equation}
     R_0 = \frac{m_{\Pe} c \alpha^2}{4\pi \hbar}.
-\]
+\end{equation}
 
 However, we will return to this in a future chapter, where we solve the Schr\"{o}dinger equation, to conclude that in fact Bohr was not correct with this model.
 
