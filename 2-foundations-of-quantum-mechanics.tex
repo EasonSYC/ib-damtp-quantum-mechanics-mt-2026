@@ -1,1 +1,110 @@
 \section{Foundations of Quantum Mechanics}
+
+We start with an overview of corresponding ideas between linear algebra and quantum mechanics.
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{c|c}
+        Linear Algebra & Quantum Mechanics \\
+        \hline
+        Vector (\(n\)-dimensional complex vector space) & State (\(\infty\)-dimensional vector space) \\
+        \(\vb{v}, \vb{w}, \ldots\) & \(\psi, \phi, \ldots\) \\
+        Discrete Basis \(\{\vb{e}_i\}_{i=1}^n\) & Continuous Basis \(\Bqty{\vb{x}}_{\vb{x} \in \RR^3}\) \\
+        Described using \(\vb{v} \mapsto \pmqty{v_1 \\ \vdots \\ v_n}\) & Described using \(\vb{x} \mapsto \psi\pqty{\vb{x}, t}\) \\
+        Denoted \(\CC^n\) & Denoted \(L^2\pqty{\RR^3}\) \\
+        Inner Product \(\pqty{\vb{v}, \vb{w}} = \sum_{i=1}^n {v_i\conjstar} w_i\) & Inner Product \(\pqty{\psi, \phi} = \int_{\RR^3} \dd[3]{\vb{x}} \psi\conjstar \pqty{\vb{x}, t} \phi\pqty{\vb{x}, t}\) \\
+        Linear Map \(\functiondomain{T}{\CC^n}{\CC^n}\) & Operator \(\functiondomain{\hat{O}}{L^2\pqty{\RR^3}}{L^2\pqty{\RR^3}}\) \\
+        Matrix Representation \(\pmqty{T_{ij}}_{i,j=1}^n\) & Operator \(\hat{O}\) \\
+        \(\vb{w} = T \vb{v}\) & \(\phi = \hat{O} \psi\) \\
+    \end{tabular}
+
+\end{table}
+
+\subsection{State, Wavefunction and Probability}
+
+In quantum mechanics, the wavefunction \(\psi\) determines the dynamics of particles in a probabilistic way.
+
+\begin{definition}[State, Wavefunction]
+    \(\psi\) is the \term{state} of a particle, and \(\psi \pqty{\vb{x}, t}\) is the complex coefficient of \(\psi\) in the \emph{continuous} basis \(\vb{x}\) at a given time \(t\), i.e., \(\psi\pqty{\vb{x}, t}\) is \(\psi\) in the \(\vb{x}\)-representation, and is called the \term{wavefunction}:
+    \begin{equation}
+        \functiondomain{\psi\pqty{\vb{x}, t}}{\RR^3}{\CC} \quad \forall t \in \RR.
+    \end{equation}
+\end{definition}
+
+\term{Born's rule} of \term{probabilistic interpretation} gives a physical interpretation of the wavefunction, hence leading to some mathematical property that we will see. The \term{probability density} for a particle described by \(\psi\) to sit at \(\vb{x}\) at a given time \(t\) is given by
+\begin{equation}
+    \rho\pqty{\vb{x}, t} \propto \abs{\psi\pqty{\vb{x}, t}}^2 = \psi\conjstar \pqty{\vb{x}, t} \psi\pqty{\vb{x}, t}.
+\end{equation}
+and the probability that the particle lies in some infinitesimal volume \(\dd{V}\) around \(\vb{x}\) is given by
+\begin{equation}
+    \rho\pqty{\vb{x}, t} \dd{V}.
+\end{equation}
+
+This leads to the following mathematical properties.
+
+\begin{enumerate}[label=(\roman*)]
+    \item \term{Square-integrability}/\term{normalisable}: a wavefunction \(\psi\) must be square-integrable, i.e. for some constant \(N \in \RR\),
+    \begin{equation}
+        \iiint_{\RR^3} \dd[3]{\vb{x}} \abs{\psi\pqty{\vb{x}, t}}^2 = N < \infty \quad \forall t \in \RR.
+    \end{equation}
+
+    \item The wavefunction must be \term{normalised}, i.e. \(N = 1\), so that the total probability of finding the particle somewhere in space is \(1\): if some wavefunction \(\psi\) is not normalised, we can always normalise it by defining
+    \begin{equation}
+        \overline{\psi}\pqty{\vb{x}, t} = \frac{1}{\sqrt{N}} \psi\pqty{\vb{x}, t}.
+    \end{equation}
+    then
+    \begin{equation}
+        \iiint_{\RR^3} \dd[3]{\vb{x}} \abs{\overline{\psi}\pqty{\vb{x}, t}}^2 = 1 \quad \forall t \in \RR.
+    \end{equation}
+
+    When \(\psi\) is normalised, we have
+    \[
+        \rho\pqty{\vb{x}, t} = \abs{\psi\pqty{\vb{x}, t}}^2.
+    \]
+
+    It is common for us to denote \(\psi\) for both \(\psi\) and \(\overline{\psi}\), the normalised version.
+
+    \item If the wavefunction \(\tilde{\psi} \pqty{\vb{x}, t} = \exp\pqty{i \alpha} \psi\pqty{\vb{x}, t}\) for some constant \(\alpha \in \RR\), then notice that the probabilities are the same, i.e. \(\abs{\tilde{\psi}\pqty{\vb{x}, t}}^2 = \abs{\psi\pqty{\vb{x}, t}}^2\). It turns out that this does not affect anything else, and so \(\tilde{\psi}\) is equivalent to \(\psi\).
+\end{enumerate}
+
+\begin{remark}
+    If \(\alpha = \alpha\pqty{\vb{x}}\) is space-dependent, then \(\tilde{\psi}\) is not equivalent to \(\psi\): although the two give the same probabilities, this changes other observables, and hence are not equivalent.
+\end{remark}
+
+In other words, states in quantum mechanics correspond to equivalent classes of wavefunctions, where two wavefunctions are equivalent if they differ by
+\[
+    \tilde{\psi} \pqty{\vb{x}, t} = \lambda \psi\pqty{\vb{x}, t}
+\]
+for any \(\lambda \in \CC\) with \(\lambda \neq 0\), combining the normalisation condition and the phase ambiguity.
+
+\subsection{The Hilbert Space \(L^2\pqty{\RR^3}\)}
+
+\begin{definition}[Hilbert Space \(\hilbertSpace\)]
+    The set of all square-integrable functions \(\psi\) on \(\RR^3\) forms a Hilbert space, denoted \(\hilbertSpace = L^2\pqty{\RR^3}\).
+\end{definition}
+
+\begin{theorem}[Square-Integrability of Linear Combination]
+    If \(\psi_1\) and \(\psi_2\) are both square-integrable functions, then their linear combination \(\psi = a_1 \psi_1 + a_2 \psi_2\) is also square-integrable for any constants \(a_1, a_2 \in \CC\).
+\end{theorem}
+
+\begin{proof}
+    Let \(N_1, N_2 \in \RR\) be such that
+    \begin{equation}
+        \int_{\RR^3} \dd[3]{\vb{x}} \abs{\psi_1\pqty{\vb{x}, t}}^2 = N_1 < \infty, \quad
+        \int_{\RR^3} \dd[3]{\vb{x}} \abs{\psi_2\pqty{\vb{x}, t}}^2 = N_2 < \infty.
+    \end{equation}
+
+    Hence, we have
+    \begin{subequations}
+        \begin{align}
+            \int_{\RR^3} \dd[3]{\vb{x}} \abs{\psi\pqty{\vb{x}, t}}^2 &= \int_{\RR^3} \dd[3]{\vb{x}} \abs{a_1 \psi_1 + a_2 \psi_2}^2 \\
+            &\leq \int_{\RR^3} \dd[3]{\vb{x}} \pqty{\abs{a_1 \psi_1} + \abs{a_2 \psi_2}}^2 \\
+            &= \int_{\RR^3} \dd[3]{\vb{x}} \pqty{\abs{a_1 \psi_1}^2 + \abs{a_2 \psi_2}^2 + 2 \abs{a_1 \psi_1} \abs{a_2 \psi_2}} \\
+            &\leq \int_{\RR^3} \dd[3]{\vb{x}} \pqty{\abs{a_1 \psi_1}^2 + \abs{a_2 \psi_2}^2 + \abs{a_1 \psi_1}^2 + \abs{a_2 \psi_2}^2} \\
+            &= \int_{\RR^3} \dd[3]{\vb{x}} \pqty{2 \abs{a_1 \psi_1}^2 + 2 \abs{a_2 \psi_2}^2} \\
+            &= 2 \abs{a_1}^2 N_1 + 2 \abs{a_2}^2 N_2 \\
+            &< \infty.
+        \end{align}
+    \end{subequations}
+    as desired.
+\end{proof}
