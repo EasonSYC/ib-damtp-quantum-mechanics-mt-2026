@@ -40,12 +40,12 @@ and the probability that the particle lies in some infinitesimal volume \(\dd{V}
     \rho\pqty{\vb{x}, t} \dd{V}.
 \end{equation}
 
-This leads to the following mathematical properties.
+This gives us the dimension of the wavefunction \(\bqty{\psi} = \dimL^{-\flatfrac{3}{2}}\). In addition, this probabilistic interpretation leads to the following mathematical properties.
 
 \begin{enumerate}[label=(\roman*)]
     \item \term{Square-integrability}/\term{normalisable}: a wavefunction \(\psi\) must be square-integrable, i.e. for some constant \(N \in \RR\),
     \begin{equation}
-        \iiint_{\RR^3} \dd[3]{\vb{x}} \abs{\psi\pqty{\vb{x}, t}}^2 = N < \infty \quad \forall t \in \RR.
+        \int_{\RR^3} \dd[3]{\vb{x}} \abs{\psi\pqty{\vb{x}, t}}^2 = N < \infty \quad \forall t \in \RR.
     \end{equation}
 
     \item The wavefunction must be \term{normalised}, i.e. \(N = 1\), so that the total probability of finding the particle somewhere in space is \(1\): if some wavefunction \(\psi\) is not normalised, we can always normalise it by defining
@@ -54,13 +54,13 @@ This leads to the following mathematical properties.
     \end{equation}
     then
     \begin{equation}
-        \iiint_{\RR^3} \dd[3]{\vb{x}} \abs{\overline{\psi}\pqty{\vb{x}, t}}^2 = 1 \quad \forall t \in \RR.
+        \int_{\RR^3} \dd[3]{\vb{x}} \abs{\overline{\psi}\pqty{\vb{x}, t}}^2 = 1 \quad \forall t \in \RR.
     \end{equation}
 
     When \(\psi\) is normalised, we have
-    \[
+    \begin{equation}
         \rho\pqty{\vb{x}, t} = \abs{\psi\pqty{\vb{x}, t}}^2.
-    \]
+    \end{equation}
 
     It is common for us to denote \(\psi\) for both \(\psi\) and \(\overline{\psi}\), the normalised version.
 
@@ -107,4 +107,181 @@ for any \(\lambda \in \CC\) with \(\lambda \neq 0\), combining the normalisation
         \end{align}
     \end{subequations}
     as desired.
+\end{proof}
+
+\subsection{Inner Product on \(\hilbertSpace\)}
+
+\begin{definition}[Inner Product on \(\hilbertSpace\)]
+    The \term{inner product} on \(\hilbertSpace\) is defined as
+    \begin{equation}
+        \pqty{\psi, \phi} = \int_{\RR^3} \dd[3]{\vb{x}} \psi\conjstar \pqty{\vb{x}, t} \phi\pqty{\vb{x}, t}.
+    \end{equation}
+    with \(\psi, \phi \in \hilbertSpace\).
+\end{definition}
+
+\begin{theorem}[Convergence of Inner Product]
+    If \(\psi, \phi \in \hilbertSpace\), then the inner product \(\pqty{\psi, \phi}\) exists.
+\end{theorem}
+
+\begin{proof}
+    Suppose we have
+    \begin{subequations}
+        \begin{align}
+            \int_{\RR^3} \dd[3]{\vb{x}} \abs{\psi\pqty{\vb{x}, t}}^2 &= N_1 < \infty, \\
+            \int_{\RR^3} \dd[3]{\vb{x}} \abs{\phi\pqty{\vb{x}, t}}^2 &= N_2 < \infty,
+        \end{align}
+    \end{subequations}
+    then
+    \begin{subequations}
+        \begin{align}
+            \abs{\pqty{\psi, \phi}} &= \abs{\int_{\RR^3} \dd[3]{\vb{x}} \psi\conjstar \phi} \\
+            &\leq \sqrt{\int_{\RR^3} \dd[3]{\vb{x}} \abs{\psi\pqty{\vb{x}, t}}^2} \sqrt{\int_{\RR^3} \dd[3]{\vb{x}} \abs{\phi\pqty{\vb{x}, t}}^2} \\
+            &= \sqrt{N_1} \sqrt{N_2} < \infty,
+        \end{align}
+    \end{subequations}
+    by the integral Schwarz inequality, as desired.
+\end{proof}
+
+\begin{proposition}[Properties of The Inner Product]
+    \begin{enumerate}
+        \item \emph{Hermitian}: \(\pqty{\psi, \phi} = \pqty{\phi, \psi}\conjstar\), for all \(\psi, \phi \in \hilbertSpace\).
+        \item \emph{Antilinear in First Entry, Linear in Second Entry}:
+        \begin{subequations}
+            \begin{align}
+                \pqty{a_1 \psi_1 + a_2 \psi_2, \phi} &= a_1\conjstar \pqty{\psi_1, \phi} + a_2\conjstar \pqty{\psi_2, \phi}, \\
+                \pqty{\psi, b_1 \phi_1 + b_2 \phi_2} &= b_1 \pqty{\psi, \phi_1} + b_2 \pqty{\psi, \phi_2},
+            \end{align}
+        \end{subequations}
+        for all \(a_1, a_2 \in \CC, \psi, \psi_1, \psi_2, \phi, \phi_1, \phi_2 \in \hilbertSpace\).
+        \item \emph{Inner product of a function with itself is positive}:
+        \begin{equation}
+            \pqty{\psi, \psi} = \int_{\RR^3} \dd[3]{\vb{x}} \abs{\psi\pqty{\vb{x}, t}}^2 > 0,
+        \end{equation}
+        since the wavefunction \(\psi \equiv 0\) is not a valid state.
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Norm of a Waverunction]
+    The \term{norm} of a wavefunction \(\psi\) is defined as
+    \begin{equation}
+        \norm{\psi} = \sqrt{\pqty{\psi, \psi}} = \sqrt{\int_{\RR^3} \dd[3]{\vb{x}} \abs{\psi\pqty{\vb{x}, t}}^2}.
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Normalised Wavefunction]
+    A wavefunction \(\psi\) is \term{normalised} if \(\norm{\psi} = 1\).
+\end{definition}
+
+\begin{definition}[Orthogonal Wavefunctions]
+    Two wavefunctions \(\psi\) and \(\phi\) are \term{orthogonal} if \(\pqty{\psi, \phi} = 0\).
+\end{definition}
+
+\begin{definition}[Orthonormal Set of Wavefunctions]
+    A set of wavefunctions \(\Bqty{\psi_n}\) is \term{orthonormal} if
+    \begin{equation}
+        \pqty{\psi_m, \psi_n} = \kronecker_{mn} = \begin{cases}
+            1, & m = n, \\
+            0, & m \neq n.
+        \end{cases}
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Complete Set of Wavefunctions]
+    A set of wavefunctions \(\Bqty{\psi_n}\) is \term{complete} if any wavefunction \(\psi\) can be expressed as a linear combination of the set, i.e., for all \(\psi \in \hilbertSpace\), there exists a set of constants \(c_n \in \CC\) such that
+    \begin{equation}
+        \psi = \sum_n c_n \psi_n.
+    \end{equation}
+\end{definition}
+
+\begin{lemma}[Coefficients of Linear Combination]
+    If a set of wavefunctions \(\Bqty{\psi_n}\) forms a complete and orthonormal basis of \(\hilbertSpace\), then the coefficients are given by
+    \begin{equation}
+        c_n = \pqty{\psi_n, \psi}.
+    \end{equation}
+\end{lemma}
+
+\begin{proof}
+    We have
+    \begin{subequations}
+        \begin{align}
+            \pqty{\psi_n, \phi} &= \pqty{\psi_n, \sum_{m = 0}^{\infty} c_m \psi_m} \\
+            &= \sum_{m = 0}^{\infty} c_m \pqty{\psi_n, \psi_m} \\
+            &= \sum_{m = 0}^{\infty} c_m \kronecker_{nm} \\
+            &= c_n.
+        \end{align}
+    \end{subequations}
+\end{proof}
+
+\subsection{Time-Dependent Schr\"odinger Equation}
+
+The second postulate in quantum mechanics is the \term{time-dependent Schr\"odinger equation}, which reads
+\begin{equation}
+    \label{eq:time-dependent-schrodinger-equation}%
+    i\hbar \pdv{t} \psi(\vb{x}, t) = \hat{H} \psi(\vb{x}, t),
+\end{equation}
+where the \term{Hamiltonian operator} \(\hat{H}\) is given by
+\begin{equation}
+    \label{eq:hamiltonian-operator}%
+    \hat{H} = -\frac{\hbar^2}{2m} \laplacian + U(\vb{x}),
+\end{equation}
+where \(U \in \RR\) is the \term{potential} of the particle.
+
+Note this equation has a first-derivative in \(t\) while a second derivative in \(\vb{x}\). This is a non-relativistic equation (but it has a relativistic generalisation).
+
+Once the wavefunction \(\psi\pqty{\vb{x}, t_0}\) is known at a given time \(t_0\) at all points \(\vb{x}\), then the wavefunction is completely determined at all times \(t > t_0\).
+
+We attempt to solve the Schr\"odinger equation for an \(\Pelectron\). Recall a general solution to the wave equation is given by \(\exp\pqty{i\pqty{kx - \omega t}}\), where \(\omega = ck\). Plugging this into \autoref{eq:time-dependent-schrodinger-equation} with \(U = 0\), we have
+\begin{equation}
+    - i \hbar \pdv{t} \psi\pqty{x, t} = - \frac{\hbar^2}{2m} \pdv[2]{x} \psi\pqty{x, t},
+\end{equation}
+and we get \(\omega = \frac{\hbar k^2}{2m}\), i.e.,
+\begin{equation}
+    \omega \propto k^2.
+\end{equation}
+
+This is consistent with the de Broglie waves in \autoref{eq:de-broglie-waves}: since for a free particle, \(E = \flatfrac{p^2}{2m}\), we have
+\begin{equation}
+    \omega = \frac{E}{\hbar} = \frac{p^2}{2 m \hbar} = \frac{\hbar k^2}{2 m}.
+\end{equation}
+
+\begin{proposition}[Norm is Constant in Time]
+    If \(\psi\) obeys \autoref{eq:time-dependent-schrodinger-equation}, then the norm of \(\psi\) is constant in time.
+\end{proposition}
+
+\begin{proof}
+    Let the norm be
+    \begin{equation}
+        N(t) = \int_{\RR^3} \dd[3]{\vb{x}} \abs{\psi\pqty{\vb{x}, t}}^2.
+    \end{equation}
+
+    We want to show that \(\dot{N} = 0\). Notice
+    \begin{subequations}
+        \begin{align}
+            \dv{N}{t} &= \dv{t} \int_{\RR^3} \dd[3]{\vb{x}} \abs{\psi\pqty{\vb{x}, t}}^2 \\
+            &= \int_{\RR^3} \dd[3]{\vb{x}} \pdv{t} \abs{\psi\pqty{\vb{x}, t}}^2.
+        \end{align}
+    \end{subequations}
+
+    Note that we differentiate to get
+    \begin{equation}
+        \pdv{t} \pqty{\psi\conjstar \psi} = \psi\conjstar \pdv{\psi}{t} + \psi \pdv{\psi\conjstar}{t}.
+    \end{equation}
+
+    By the Schr\"odinger equation, we have
+    \begin{subequations}
+        \begin{align}
+            \pdv{\psi}{t} &=\frac{i \hbar}{2m} \laplacian \psi - \frac{i}{\hbar} U \psi, \\
+            \pdv{\psi\conjstar}{t} &= -\frac{i \hbar}{2m} \laplacian \psi\conjstar + \frac{i}{\hbar} U \psi\conjstar.
+        \end{align}
+    \end{subequations}
+
+    Then, note that
+    \begin{equation}
+        \pdv{t} \pqty{\psi\conjstar \psi} = \div \pqty{\frac{i \hbar}{2m} \pqty{\psi\conjstar \grad{\psi} - \psi \grad{\psi\conjstar}}},
+    \end{equation}
+    and hence
+    \begin{equation}
+        \frac{N}{t} = \int_{\RR^3} \dd[3]{\vb{x}} \div \bqty{\frac{i \hbar}{2m} \pqty{\psi\conjstar \grad{\psi} - \psi \grad{\psi\conjstar}}} = 0
+    \end{equation}
+    by the divergence theorem, since \(\psi\) is square-integrable and hence vanishes at infinity.
 \end{proof}
