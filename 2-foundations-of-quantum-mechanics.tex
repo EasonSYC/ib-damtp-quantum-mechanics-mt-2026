@@ -281,7 +281,161 @@ This is consistent with the de Broglie waves in \autoref{eq:de-broglie-waves}: s
     \end{equation}
     and hence
     \begin{equation}
-        \frac{N}{t} = \int_{\RR^3} \dd[3]{\vb{x}} \div \bqty{\frac{i \hbar}{2m} \pqty{\psi\conjstar \grad{\psi} - \psi \grad{\psi\conjstar}}} = 0
+        \dv{N}{t} = \int_{\RR^3} \dd[3]{\vb{x}} \div \bqty{\frac{i \hbar}{2m} \pqty{\psi\conjstar \grad{\psi} - \psi \grad{\psi\conjstar}}} = 0
     \end{equation}
     by the divergence theorem, since \(\psi\) is square-integrable and hence vanishes at infinity.
+\end{proof}
+
+This leads to the \term{continuity equation} for the probability density, given by
+\begin{subequations}
+\begin{equation}
+    \pdv{t} \rho\pqty{\vb{x}, t} + \div \vb{j} = 0,
+\end{equation}
+where the \term{probability current} is given by
+\begin{equation}
+    \vb{j} = \frac{i \hbar}{2m} \pqty{\psi\conjstar \grad{\psi} - \psi \grad{\psi\conjstar}}.
+\end{equation}
+\end{subequations}
+
+\small
+
+Note the similarity with the continuity equation of charge in electromagnetism
+\begin{equation}
+    \pdv{\rho_{\text{charge}}}{t} + \div \vb{J}_{\text{e.m.}} = 0,
+\end{equation}
+
+\normalsize
+
+\subsection{Measurements and Observables}
+
+The motivating question of this section, is how to extract information from a state \(\psi\)?
+
+\begin{definition}
+    An \term{observable} is any property of the particle described by the state \(\psi\) that can be measured. In quantum mechanics, observables are represented by an \term{operator} \(\hat{O}\) on the Hilbert space \(\hilbertSpace\), and a \term{measurement} of the observable \(\hat{O}\) is the expectation value of an operator \(\ev{\hat{O}}\).
+\end{definition}
+
+\subsubsection{Heuristic Derivation of Expectation Values}
+
+Consider measuring the value of a selected die from \(\infty\) rolls. The probabilities satisfy \(p_1 = p_2 = \cdots = p_6 = \flatfrac{1}{6}\), and
+\begin{equation}
+    \ev{\text{result}} = \sum_{i = 1}^{6} \text{result}_i p_i = \frac{1}{6} \sum_{i = 1}^{6} i = \frac{21}{6} = 3.5.
+\end{equation}
+
+The expectation value of an observable \(O\) is the mean of an infinite series of measurements performed on all particles in the same state \(\psi\), given by (in one-dimension)
+\begin{subequations}
+    \begin{align}
+        \ev{x} &= \int_{\minusinfty}^{\plusinfty} \dd{x} x \abs{\psi\pqty{\vb{x}, t}}^2 \\
+        &= \int_{\minusinfty}^{\plusinfty} \dd{x} \psi^{\ast} \pqty{\vb{x}, t} x \psi\pqty{\vb{x}, t},
+    \end{align}
+    and
+    \begin{align}
+        \ev{p} &= m \dv{\ev{x}}{t} \\
+        &= m \dv{t} \int_{\minusinfty}^{\plusinfty} \dd{x} \psi^{\ast} x \psi \\
+        &= \frac{i \hbar m}{2m} \int_{\minusinfty}^{\plusinfty} \dd{x}x \pdv{x} \pqty{\psi \pdv{\psi^{\ast}}{x} - \psi^{\ast} \pdv{\psi}{x}} \\
+        &= \int_{\minusinfty}^{\plusinfty} \dd{x} \psi^{\ast} \pqty{- i \hbar \pdv{x}} \psi,
+    \end{align}
+\end{subequations}
+
+Heuristically speaking, the expectation value of an observable is given by
+\begin{equation}
+    \ev{\hat{O}} = \int_{\RR^3} \dd[3]{\vb{x}} \psi^{\ast} \hat{O} \psi.
+\end{equation}
+
+\subsubsection{Hermitian Operator}
+
+In Quantum Mechanics, an \term{operator} \(\hat{O}\) is simply a linear operator on the Hilbert space \(\hilbertSpace\), with \(\phi = \hat{O} \psi\). Let \(\psi\) be represented in \(\vb{x}\), then our operators may also be represented in \(\vb{x}\) as well.
+
+\begin{definition}
+    An \term{operator} \(\hat{O}\) in \(\hilbertSpace\) is any linear map \(\functiondomain{\hat{O}}{\hilbertSpace}{\hilbertSpace}\), such that
+    \begin{equation}
+        \hat{O} \pqty{a_1 \psi_1 + a_2 \psi_2} = a_1 \hat{O} \psi_1 + a_2 \hat{O} \psi_2
+    \end{equation}
+    for all \(a_1, a_2 \in \CC, \psi_1, \psi_2 \in \hilbertSpace\).
+\end{definition}
+
+\begin{examples}
+    \begin{itemize}
+        \item The finite differential operators
+        \[
+            \sum_{n = 0}^{N} q_n\pqty{x} \pdv[n]{x}
+        \]
+        where \(q_n \pqty{x}\) are polynomials are operators.
+        \item The \term{location operator} \(\hat{x}\) is an operator, defined by \(\hat{x} \psi = x \psi\).
+        \item The \term{momentum operator} \(\hat{p} = - i \hbar \pdv{x}\) is an operator, defined by \(\hat{p} \psi = - i \hbar \pdv{x} \psi\).
+        \item The \term{translation operator} \(\hat{T}_a\) is an operator, defined by \(\hat{T}_a \psi \pqty{x} = \psi\pqty{x - a}\) for \(a \in \RR\).
+        \item The \term{parity operator} \(\hat{P}\) is an operator, defined by \(\hat{P} \psi \pqty{x} = \psi\pqty{-x}\).
+    \end{itemize}
+\end{examples}
+
+\begin{definition}[Hermitian Conjugate]
+    The \term{Hermitian conjugate} \(\hat{O}\hermitian\) of operator \(\hat{O}\) is the operator such that
+    \begin{equation}
+        \pqty{\hat{O}\hermitian \psi_1, \psi_2} = \pqty{\psi_1, \hat{O} \psi_2}.
+    \end{equation}
+\end{definition}
+
+It is easy to verify that
+\begin{subequations}
+    \begin{align}
+        \pqty{a_1 \hat{A}_1 + a_2 \hat{A}_2}\hermitian &= a_1\conjstar \hat{A}_1\hermitian + a_2\conjstar \hat{A}_2\hermitian, \\
+        \pqty{\hat{A}_1 \hat{A}_2}\hermitian &= \hat{A}_2\hermitian \hat{A}_1\hermitian.
+    \end{align}
+\end{subequations}
+
+\begin{definition}[Hermitian Operator]
+    An operator \(\hat{O}\) is \term{Hermitian} if \(\hat{O}\hermitian = \hat{O}\).
+\end{definition}
+
+\begin{remark}
+    Physical quantities are represented by Hermitian operators.
+\end{remark}
+
+\begin{examples}
+    \begin{enumerate}
+        \item The location operator \(\functionmap{\hat{x}}{\psi}{x \psi}\) is Hermitian. Verify that
+        \begin{equation}
+            \pqty{\hat{x} \psi_1, \psi_2} = \int_{\minusinfty}^{\plusinfty} \dd{x} \pqty{x \psi_1}\conjstar \psi_2 = \int_{\minusinfty}^{\plusinfty} \dd{x} \pqty{\psi_1}\conjstar x \psi_2 = \pqty{\psi_1, \hat{x} \psi_2}.
+        \end{equation}
+
+        \item The momentum operator \(\functionmap{\hat{p}}{\psi}{- i \hbar \pdv{x} \psi}\) is Hermitian. Verify that
+        \begin{subequations}
+            \begin{align}
+                \pqty{\hat{p} \psi_1, \psi_2} &= \int_{\minusinfty}^{\plusinfty} \dd{x} \pqty{- i \hbar \pdv{x} \psi_1}\conjstar \psi_2 \\
+                &= i \hbar \int_{\minusinfty}^{\plusinfty} \dd{x} \pdv{\psi_1\conjstar}{x} \psi_2 \\
+                &= i \hbar \bqty{\psi_1\conjstar \psi_2}_{\minusinfty}^{\plusinfty} - i \hbar \int_{\minusinfty}^{\plusinfty} \dd{x} \psi_1\conjstar \pdv{\psi_2}{x} \\
+                &= \int_{\minusinfty}^{\plusinfty} \dd{x} \pqty{\psi_1}\conjstar \pqty{- i \hbar \pdv{x} \psi_2} \\
+                &= \pqty{\psi_1, \hat{p} \psi_2},
+            \end{align}
+        \end{subequations}
+
+        \item The \term{kinetic energy operator}
+        \begin{equation}
+            \functionmap{\hat{T}}{\psi}{\frac{\hat{p}^2}{2m} \psi = \frac{\hbar^2}{2 m} \pdv[2]{x} \psi}
+        \end{equation}
+        is Hermitian.
+        \item The \term{potential energy operator} \(\functionmap{\hat{U}}{\psi}{U\pqty{x} \psi}\) is Hermitian, since \(U\pqty{x}\) is real.
+        \item The \term{total energy operator} \(\functionmap{\hat{H}}{\psi}{\hat{T} \psi + \hat{U} \psi}\) is Hermitian, since it is the sum of two Hermitian operators. This is known as the \term{Hamiltonian operator}.
+    \end{enumerate}
+\end{examples}
+
+\begin{theorem}[Hermitian Operators have Real Eigenvalues]
+    The eigenvalues of Hermitian operators are real.
+\end{theorem}
+
+\begin{proof}
+    Let \(\hat{A}\) be a Hermitian operator with some eigenvalue \(\lambda\) and non-zero eigenfunction \(\psi\). Then we have
+    \begin{subequations}
+        \begin{align}
+            \pqty{\psi, \hat{A} \psi} &= \pqty{\psi, a \psi} \\
+            &= a \pqty{\psi, \psi},
+        \end{align}
+        while since \(\hat{A}\) is Hermitian,
+        \begin{align}
+            \pqty{\psi, \hat{A} \psi} &= \pqty{\hat{A} \psi, \psi} \\
+            &= \pqty{a \psi, \psi} \\
+            &= a\conjstar \pqty{\psi, \psi}.
+        \end{align}
+    \end{subequations}
+
+    Hence, \(a = a\conjstar\), i.e. \(a \in \RR\).
 \end{proof}
