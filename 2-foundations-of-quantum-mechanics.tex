@@ -311,7 +311,7 @@ Note the similarity with the continuity equation of charge in electromagnetism
 The motivating question of this section, is how to extract information from a state \(\psi\)?
 
 \begin{definition}
-    An \term{observable} is any property of the particle described by the state \(\psi\) that can be measured. In quantum mechanics, observables are represented by an \term{operator} \(\hat{O}\) on the Hilbert space \(\hilbertSpace\), and a \term{measurement} of the observable \(\hat{O}\) is the expectation value of an operator \(\ev{\hat{O}}\).
+    An \term{observable} is any property of the particle described by the state \(\psi\) that can be measured. In quantum mechanics, observables are represented by an \term{operator} \(\hat{O}\) on the Hilbert space \(\hilbertSpace\), and a \term{measurement} of the observable \(\hat{O}\) is related to the expectation value of an operator \(\ev{\hat{O}}\).
 \end{definition}
 
 \subsubsection{Heuristic Derivation of Expectation Values}
@@ -439,3 +439,130 @@ It is easy to verify that
 
     Hence, \(a = a\conjstar\), i.e. \(a \in \RR\).
 \end{proof}
+
+\begin{theorem}[Hermitian Operators have Orthogonal Eigenfunctions]
+    If \(\hat{A}\) is Hermitian, and \(\psi_1, \psi_2\) are eigenfunctions of \(\hat{A}\) corresponding to distinct eigenvalues \(a_1, a_2 \in \RR\), then \(\psi_1\) and \(\psi_2\) are orthogonal.
+\end{theorem}
+
+\begin{proof}
+    We have \(\hat{A} \psi_1 = a_1 \psi_1\) and \(\hat{A} \psi_2 = a_2 \psi_2\) by definition. Hence,
+    \begin{subequations}
+        \begin{align}
+            a_1 \pqty{\psi_1, \psi_2} &= a_1\conjstar \pqty{\psi_1, \psi_2} = \pqty{a \psi_1, \psi_2} = \pqty{\hat{A} \psi_1, \psi_2} \\
+            &= \pqty{\psi, \hat{A} \psi_2} = \pqty{\psi_1, a_2 \psi_2} = a_2 \pqty{\psi_1, \psi_2}.
+        \end{align}
+    \end{subequations}
+
+    Hence, we have \(\pqty{a_1 - a_2} \inner{\psi_1}{\psi_2} = 0\). Given \(a_1 \neq a_2\), we must have \(\inner{\psi_1}{\psi_2} = 0\), so \(\psi_1\) and \(\psi_2\) are orthogonal.
+\end{proof}
+
+\begin{theorem}[Eigenfunctions form a Complete Orthogonal Basis]
+    The discrete or continuous set of eigenfunctions of any Hermitian operator together form a complete and orthogonal basis of \(\hilbertSpace\) (where we allow for infinite sums).
+\end{theorem}
+
+For a discrete basis, any wavefunction \(\psi\) could be written in the form
+\begin{equation}
+    \psi\pqty{\vb{x}, t} = \sum_{i = 0}^{\infty} a_i \psi_i \pqty{\vb{x}, t}
+\end{equation}
+where the eigenfunctions are labelled by \(\psi_i\) for \(i \in \NN_0\), with coefficients \(a_i \in \CC\). If instead, that the basis is continuously labelled by \(\lambda \in \RR\), then we may integrate over a suitable subset \(\Delta \lambda \subset \RR\)
+\begin{equation}
+    \psi\pqty{\vb{x}, t} = \int_{\Delta \lambda} a\pqty{\lambda} \psi_\lambda \pqty{\vb{x}, t} \dd{\lambda}
+\end{equation}
+for continuosu coefficients \(a \pqty{\lambda} \in \CC\).
+
+\subsubsection{Expectation Values and Measurements}
+
+The Copenhagen interpretation postulates that observables correspond to Hermitian operators, \(\hat{O} = \hat{O}\hermitian\), and that:
+\begin{enumerate}
+    \item The eigenvalues of \(\hat{O}\) are the possible outcomes of a measurement of the observable \(O\).
+    
+    \item If \(\hat{O}\) has a discrete set of normalised eigenfunctions \(\Bqty{\psi_i}\) with distinct eigenvalues \(\Bqty{\lambda_i}\), then the measurement of \(O\) obeys a \term{probability distribution} as
+    \begin{equation}
+        \Prob\pqty{O = \lambda_i} = \abs{a_i}^2 = \abs{\pqty{\psi_i, \psi}}^2,
+    \end{equation}
+    where \(\psi\) is a normalised state, written as \(\psi = \sum_{i = 0}^{\infty} a_i \psi_i\).
+
+    \item If \(\Bqty{\psi_i}\) is an orthonormal set of eigenfunctions of \(\hat{O}\), and \(\Bqty{\psi_j}_{j \in J}\) is a subset of this with expected value \(\lambda\), then we have
+    \begin{equation}
+        \Prob\pqty{O = \lambda} = \sum_{j \in J} \abs{a_j}^2 = \sum_{j \in J} \abs{\pqty{\psi_j, \psi}}^2
+    \end{equation}
+\end{enumerate}
+
+We may confirm that the probabilites indeed sum to \(1\):
+\begin{subequations}
+    \begin{align}
+        \sum_{i = 0}^{\infty} \abs{a_i}^2 &= \sum_{i = 0}^{\infty} \pqty{a_i \psi_i, a_i \psi_i} && \pqty{\psi_i, \psi_i} = 1 \\
+        &= \sum_{i, j = 0}^{\infty} \pqty{a_i \psi_i, a_j \psi_j} && \pqty{\psi_i, \psi_j} = \kronecker_{ij} \\
+        &= \pqty{\psi, \psi} = 1.
+    \end{align}
+\end{subequations}
+
+Finally, we have the following.
+
+\begin{enumerate}[resume]
+    \item \term{Projection Postulate.} If \(O\) is measured on \(\psi\) at time \(t\) and the outcome of the measurement is \(\lambda_i\), then the wavefunction of \(\psi\) instantaneously after the measurement becomes \(a_i \psi_i\), or simply, \(\psi_i\), the eigenfunction of \(\hat{O}\) corresponding to the measurement value \(\lambda_i\). This is known as the \term{collapse} of the wavefunction.
+
+    In particular, if \(\hat{O}\) has a degenerate subset of eigenfunctions with identical eigenvalue \(\lambda\) indexed by \(J\), then \(\psi\) collapses to \(\sum_{j \in J} a_j \psi_j\).
+\end{enumerate}
+
+\begin{definition}[Projection Operator]
+    The \term{projection operator} \(\hat{P}_i\) is given by
+    \begin{equation}
+        \functionmap{\hat{P}_i}{\psi}{\pqty{\psi_i, \psi} \psi_i}
+    \end{equation}
+    where \(\psi = \sum a_i \psi_i\).
+\end{definition}
+
+Then indeed, our definition of the expectation of an observable is consistent with the definition of the expectation of a random variable (in \textit{IA Probability}): we have the expectation of \(O\) measured on the state \(\psi\) is
+\begin{subequations}
+    \begin{align}
+        \ev{O}_{\psi} &= \sum_{i = 0}^{\infty} \lambda_i \Prob\pqty{O = \lambda_i} \\
+        &= \sum_{i = 0}^{\infty} \lambda_i \abs{\pqty{\psi_i, \psi}}^2 \\
+        &= \pqty{\sum_{i = 1}^{\infty} \pqty{\psi_i, \psi} \psi_i, \sum_{j = 1}^{\infty} \lambda_j \pqty{\psi_j, \psi} \psi_j} \\
+        &= \pqty{\psi, \hat{O} \psi}.
+    \end{align}
+\end{subequations}
+
+Note an important property of the expectation is
+\begin{equation}
+    \ev{a \hat{A} + b \hat{B}}_{\psi} = a \ev{\hat{A}}_{\psi} + b \ev{\hat{B}}_{\psi}
+\end{equation}
+for all \(a, b \in \CC\), and \(\hat{A}, \hat{B}\) being Hermitian operators.
+
+The projection postulate tells us that if the observable is measured twice at very small time intervals \(\delta t \to 0\), then the second measurement yields the identical result to the first one with probability tending to \(1\).
+
+\term{Born's Rule} hence allows us to deduce a physical interpretation of the inner product: if \(\phi\pqty{\vb{x}, t}\) is the desired outcome of a measurement on a particle described by \(\psi\pqty{\vb{x}, t}\), then the \term{probability amplitude} of the measurement on \(\psi\) giving the desired outcome \(\phi\) is
+\begin{equation}
+    A = \pqty{\phi, \psi} = \int_{\RR^3} \dd[3]{\vb{x}} \phi\conjstar \pqty{\vb{x}, t} \psi\pqty{\vb{x}, t}
+\end{equation}
+and the probability is given by \(P = A\conjstar A = \abs{A}^2\).
+
+\subsection{Time-Independent Schr\"odinger Equation (TISE)}
+
+Recall the time-dependent Schr\"odinger equation given by
+\begin{equation}
+    i \hbar \pdv{\psi}{t} \pqty{\vb{x}, t} = \hat{H} \psi \pqty{\vb{x}, t}
+\end{equation}
+
+Consider using a separable (factorised) ansatz given by
+\begin{equation}
+    \psi\pqty{\vb{x}, t} = T\pqty{t} \chi \pqty{\vb{x}}.
+\end{equation}
+
+Putting this into the time-dependent Schr\"odinger equation, we get
+\begin{equation}
+    \frac{1}{T\pqty{t}} i \hbar \pdv{T}{t} \pqty{t} = \frac{\hat{H} \chi\pqty{\vb{x}}}{\chi\pqty{\vb{x}}},
+\end{equation}
+but then the left-hand side only depends on \(t\), while the right-hand side only depends on \(\vb{x}\). So both sides have to be equal to a constant \(E \in \RR\), and this yields the equations
+\begin{subequations}
+    \begin{equation}
+        \frac{1}{T} i \hbar \pdv{T}{t} = E
+    \end{equation}
+    and
+    \begin{equation}
+        \label{eq:time-independent-schrodinger-equation}%
+        \hat{H} \chi = E \chi.
+    \end{equation}
+\end{subequations}
+
+\autoref{eq:time-independent-schrodinger-equation} is known as the \term{Time-Independent Schr\"odinger Equation (TISE)}.
