@@ -1,1 +1,60 @@
 \section{1D Solutions of the Schr\"{o}dinger Equation}
+
+We first note that from the time-dependent Schr\"{o}dinger equation, if the potential \(U\pqty{x}\) is finite at some point, then \(\chi\) must be twice-differentiable with a finite second derivative. But if \(U\pqty{x}\) is infinite, then \(\chi\) must be continuous, but its derivative may be discontinuous.
+
+\subsection{Bound States}
+
+\subsubsection{Infinite Potential Well}
+
+Let \(a > 0\). Consider the potential well given by
+\begin{equation}
+    U\pqty{x} = \begin{cases}
+    0, & \qfor \abs{x} \leq a, \\
+    \infty, & \quad \text{otherwise}.
+    \end{cases}
+\end{equation}
+
+Clearly, for \(\abs{x} > a\), we need \(\chi\pqty{x} = 0\), otherwise \(U \chi\) is not finite. We look at solutions to the time-independent Schr\"{o}dinger equation in the region \(\abs{x} \leq a\), which now reads
+\begin{equation}
+    - \frac{\hbar^2}{2m} \chi'' = E \chi
+\end{equation}
+and hence
+\begin{equation}
+    \chi'' + \frac{2 m E}{\hbar^2} \chi = 0.
+\end{equation}
+
+Denoting \(k^2 = \frac{2 m E}{\hbar^2}\), we have the general solution
+\begin{equation}
+    \chi\pqty{x} = A \sin\pqty{k x} + B \cos\pqty{k x}.
+\end{equation}
+
+Imposing the boundary conditions of continuity at \(x = \pm a\), we notice that
+\begin{equation}
+    \begin{split}
+        \chi\pqty{a} &= 0 \\
+        \chi\pqty{-a} &= 0
+    \end{split}
+    \quad
+    \implies
+    \quad
+    \begin{split}
+        A \sin \pqty{ka} &= 0, \\
+        B \cos \pqty{ka} &= 0.
+    \end{split}
+\end{equation}
+
+For a non-trivial solution where \(\chi \neq 0\), we need one of the following two options to hold.
+
+\begin{enumerate}[label=(\roman*)]
+    \item \(A = 0\) and \(\cos \pqty{ka} = 0\), which gives \(k_n = \flatfrac{n \pi}{2 a}\) for odd \(n\) and corresponding eigenfunction \(\chi_n\pqty{X} = B \cos \pqty{k_n x}\).
+    \item \(B = 0\) and \(\sin \pqty{ka} = 0\), which gives \(k_n = \flatfrac{n \pi}{2 a}\) for even \(n\) and corresponding eigenfunction \(\chi_n\pqty{X} = A \sin \pqty{k_n x}\).
+\end{enumerate}
+
+This allows us to find the allowed energy levels (the eigenvalues of the Hamiltonians) to be
+\begin{equation}
+    E_n = \frac{\hbar^2 k_n^2}{2 m} = \frac{n^2 \pi^2 \hbar^2}{8 m a^2} \qfor n \in \NN.
+\end{equation}
+
+\subsection{Free Particle}
+
+\subsection{Scattering States}

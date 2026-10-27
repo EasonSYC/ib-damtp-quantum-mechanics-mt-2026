@@ -565,4 +565,84 @@ but then the left-hand side only depends on \(t\), while the right-hand side onl
     \end{equation}
 \end{subequations}
 
-\autoref{eq:time-independent-schrodinger-equation} is known as the \term{Time-Independent Schr\"odinger Equation (TISE)}.
+\autoref{eq:time-independent-schrodinger-equation} is known as the \term{Time-Independent Schr\"odinger Equation (TISE)}. This is clearly an eigenvalue problem for the Hamiltonian operator \(\hat{H}\), with the eigenvalues \(E\) being the set of all possible outcomes of measuring energy of the state \(\psi\). The time component trivially solves to give
+\begin{equation}
+    T\pqty{t} = \exp\pqty{- \frac{i E t}{\hbar}}.
+\end{equation}
+
+\subsection{Stationary States}
+
+A particular solution to the time-dependent Schr\"odinger equation is given by
+\begin{equation}
+    \psi\pqty{\vb{x}, t} = \chi\pqty{\vb{x}} \exp\pqty{- \frac{i E t}{\hbar}},
+\end{equation}
+where \(E\) is the eigenvalue associated with an eigenfunction \(\chi\pqty{\vb{x}}\).
+
+\begin{definition}[Stationary States]
+    Such particular solutions to the time-dependent Schr\"odinger equation are known as \term{stationary states}.
+\end{definition}
+
+The reason behind this is simple. Notice the probability density is given by
+\begin{equation}
+    \rho\pqty{\vb{x}, t} = \abs{\psi\pqty{\vb{x}, t}}^2 = \abs{\chi\pqty{\vb{x}}}^2
+\end{equation}
+is independent of time \(t\), hence the name.
+
+\begin{theorem}[Linear Combination of Stationary States are all Solutions]
+    Any solution to the time-dependent Schr\"odinger equation can be expressed as a linear combination of stationary states.
+\end{theorem}
+
+For systems with a discrete set of eigenvalues denoted \(E_0, E_1, \ldots\) with associated eigenfunctions \(\chi_0, \chi_1, \ldots\), any solution to the time-dependent Schr\"odinger equation can be expressed as
+\begin{equation}
+    \psi\pqty{\vb{x}, t} = \sum_{n = 0}^{\infty} a_n \chi_n\pqty{\vb{x}} \exp\pqty{- \frac{i E_n t}{\hbar}},
+\end{equation}
+where \(a_n \in \CC\) are complex coefficients. In particular, at \(t = 0\), we have
+\begin{equation}
+    \psi\pqty{\vb{x}, 0} = \sum_{n = 0}^{\infty} a_n \chi_n\pqty{\vb{x}}.
+\end{equation}
+
+If the system has a continuous set of eigenvalues \(E\pqty\alpha\) labelled by \(\alpha \in \RR\) with associated eigenfunctions \(\chi_\alpha\), then we have
+\begin{equation}
+    \psi\pqty{\vb{x}, t} = \int_{\Delta \alpha} A\pqty{\alpha} \chi_\alpha\pqty{\vb{x}} \exp\pqty{- \frac{i E\pqty{\alpha} t}{\hbar}} \dd{\alpha},
+\end{equation}
+where \(\Delta\alpha \subseteq \RR\) is a suitable subset of \(\RR\) and \(A\pqty{\alpha} \in \CC\) are complex coefficients.
+
+In the discrete case, in the Copenhagen interpretation, \(\abs{a_n}^2\) is the probability of measuring \(E = E_n\).
+
+\begin{example}[Two-Energy-Level System]
+    Now, consider a system with only two energy eigenvalues \(E_1 \neq E_2\). Then the general solution to the time-dependent Schr\"odinger equation is given by
+    \begin{equation}
+        \psi\pqty{\vb{x}, t} = a_1 \chi_1\pqty{\vb{x}} \exp\pqty{- \frac{i E_1 t}{\hbar}} + a_2 \chi_2\pqty{\vb{x}} \exp\pqty{- \frac{i E_2 t}{\hbar}}.
+    \end{equation}
+    
+    At \(t = 0\), we have \(\psi\pqty{\vb{x}, 0} = a_1 \chi_1\pqty{\vb{x}} + a_2 \chi_2\pqty{\vb{x}}\).
+    
+    If either of \(a_1\) and \(a_2\) is zero, then \(\psi\) is stationary. If not, then notice the probability density is given by
+    \begin{subequations}
+        \begin{align}
+            \rho\pqty{\vb{x}, t} &= \abs{\psi\pqty{\vb{x}, t}}^2 = \psi\conjstar\psi \\
+            \begin{split}
+                &= \pqty{a_1 \conjstar \chi_1\conjstar\pqty{\vb{x}} \exp\pqty{\frac{i E_1 t}{\hbar}} + a_2\conjstar \chi_2\conjstar\pqty{\vb{x}} \exp\pqty{\frac{i E_2 t}{\hbar}}} \\
+                &\phantom{=} \hspace{15em} \pqty{a_1 \chi_1\pqty{\vb{x}} \exp\pqty{- \frac{i E_1 t}{\hbar}} + a_2 \chi_2\pqty{\vb{x}} \exp\pqty{- \frac{i E_2 t}{\hbar}}}
+            \end{split} \\
+            \begin{split}
+                &= \abs{a_1}^2 \abs{\chi_1\pqty{\vb{x}}}^2 + \abs{a_2}^2 \abs{\chi_2\pqty{\vb{x}}}^2 \\
+                &\phantom{=} \hspace{8em} + a_1 a_2\conjstar \chi_1\pqty{\vb{x}} \chi_2\conjstar\pqty{\vb{x}} \exp\pqty{- i \frac{E_1 - E_2}{\hbar} t} + a_1\conjstar a_2 \chi_1\conjstar\pqty{\vb{x}} \chi_2\pqty{\vb{x}} \exp\pqty{i \frac{E_1 - E_2}{\hbar} t}.
+            \end{split}
+        \end{align}
+    \end{subequations}
+    
+    Since \(\hat{H}\) is a real operator, we can make \(\chi_1\) and \(\chi_2\) real. Let \(a_1 = \abs{a_1} \exp\pqty{i \alpha_1}\) and \(a_2 = \abs{a_2} \exp\pqty{i \alpha_1}\). Then we have
+    \begin{equation}
+        \begin{split}
+        \rho\pqty{\vb{x}, t} &= \abs{a_1}^2 \abs{\chi_1\pqty{\vb{x}}}^2 + \abs{a_2}^2 \abs{\chi_2\pqty{\vb{x}}}^2 \\
+        &\phantom{=} \hspace{8em} + 2 \abs{a_1} \abs{a_2} \chi_1\pqty{\vb{x}} \chi_2\pqty{\vb{x}} \cos\pqty{\frac{E_1 - E_2}{\hbar} t + \alpha_1 - \alpha_2}.
+        \end{split}
+    \end{equation}
+    
+    Hence, the probability density points oscillates like
+    \begin{equation}
+        \cos\pqty{\frac{\pqty{E_1 - E_2}t}{\hbar}}
+    \end{equation}
+    since \(\alpha_1 - \alpha_2\) is just a constant phase shift. The frequency of the oscillation depends on the energy difference \(\Delta E = E_1 - E_2\).
+\end{example}
