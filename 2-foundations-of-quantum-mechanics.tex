@@ -230,7 +230,7 @@ Note this equation has a first-derivative in \(t\) while a second derivative in 
 
 Once the wavefunction \(\psi\pqty{\vb{x}, t_0}\) is known at a given time \(t_0\) at all points \(\vb{x}\), then the wavefunction is completely determined at all times \(t > t_0\).
 
-We attempt to solve the Schr\"odinger equation for an \(\Pelectron\). Recall a general solution to the wave equation is given by \(\exp\pqty{i\pqty{kx - \omega t}}\), where \(\omega = ck\). Plugging this into \autoref{eq:time-dependent-schrodinger-equation} with \(U = 0\), we have
+We attempt to solve the Schr\"odinger equation for an \(\Pelectron\). Recall a general solution to the wave equation is given by \(\exp\pqty{i\pqty{kx - \omega t}}\), where \(\omega = ck\). Plugging this into \eqref{eq:time-dependent-schrodinger-equation} with \(U = 0\), we have
 \begin{equation}
     - i \hbar \pdv{t} \psi\pqty{x, t} = - \frac{\hbar^2}{2m} \pdv[2]{x} \psi\pqty{x, t},
 \end{equation}
@@ -239,13 +239,13 @@ and we get \(\omega = \frac{\hbar k^2}{2m}\), i.e.,
     \omega \propto k^2.
 \end{equation}
 
-This is consistent with the de Broglie waves in \autoref{eq:de-broglie-waves}: since for a free particle, \(E = \flatfrac{p^2}{2m}\), we have
+This is consistent with the de Broglie waves in \eqref{eq:de-broglie-waves}: since for a free particle, \(E = \flatfrac{p^2}{2m}\), we have
 \begin{equation}
     \omega = \frac{E}{\hbar} = \frac{p^2}{2 m \hbar} = \frac{\hbar k^2}{2 m}.
 \end{equation}
 
 \begin{proposition}[Norm is Constant in Time]
-    If \(\psi\) obeys \autoref{eq:time-dependent-schrodinger-equation}, then the norm of \(\psi\) is constant in time.
+    If \(\psi\) obeys \eqref{eq:time-dependent-schrodinger-equation}, then the norm of \(\psi\) is constant in time.
 \end{proposition}
 
 \begin{proof}
@@ -565,7 +565,7 @@ but then the left-hand side only depends on \(t\), while the right-hand side onl
     \end{equation}
 \end{subequations}
 
-\autoref{eq:time-independent-schrodinger-equation} is known as the \term{Time-Independent Schr\"odinger Equation (TISE)}. This is clearly an eigenvalue problem for the Hamiltonian operator \(\hat{H}\), with the eigenvalues \(E\) being the set of all possible outcomes of measuring energy of the state \(\psi\). The time component trivially solves to give
+\eqref{eq:time-independent-schrodinger-equation} is known as the \term{Time-Independent Schr\"odinger Equation (TISE)}. This is clearly an eigenvalue problem for the Hamiltonian operator \(\hat{H}\), with the eigenvalues \(E\) being the set of all possible outcomes of measuring energy of the state \(\psi\). The time component trivially solves to give
 \begin{equation}
     T\pqty{t} = \exp\pqty{- \frac{i E t}{\hbar}}.
 \end{equation}
