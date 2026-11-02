@@ -4,15 +4,59 @@ We first note that from the time-dependent Schr\"{o}dinger equation, if the pote
 
 \subsection{Bound States}
 
+\begin{definition}[Bound State]
+    A \term{bound state} is a state of a quantum system whose wavefunction \(\psi\) is normalisable, i.e., \(\int \abs{\psi\pqty{x}}^2 \dd{x} < \infty\). 
+\end{definition}
+
+Bound states (usually) have energy \(E\) is less than the potential at infinity, and has quantised/discrete energy levels.
+
 \subsubsection{Infinite Potential Well}
 
-Let \(a > 0\). Consider the potential well given by
+Let \(a > 0\). Consider the potential well given by \autoref{fig:infinite-well}, defined by
 \begin{equation}
     U\pqty{x} = \begin{cases}
     0, & \qfor \abs{x} \leq a, \\
     \infty, & \quad \text{otherwise}.
     \end{cases}
 \end{equation}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = \(x\),
+            ylabel = \(U\pqty{x}\),
+            xmin = -2.2,
+            xmax = 2.2,
+            ymin = -0.2,
+            ymax = 1.3,
+            xtick = {-1, 1},
+            xticklabels = {\(-a\), \(a\)},
+            ytick = \empty,
+            width = 0.7\textwidth,
+            height = 0.35\textwidth,
+        ]
+
+            \addplot[blue, very thick] coordinates {
+                (-1, 0)
+                (1, 0)
+            };
+
+            \addplot[blue, very thick, dashed] coordinates {
+                (-1, 0)
+                (-1, 1.25)
+            };
+
+            \addplot[blue, very thick, dashed] coordinates {
+                (1, 0)
+                (1, 1.25)
+            };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Infinite Square Potential Well}
+    \label{fig:infinite-well}%
+\end{figure}
 
 Clearly, for \(\abs{x} > a\), we need \(\chi\pqty{x} = 0\), otherwise \(U \chi\) is not finite. We look at solutions to the time-independent Schr\"{o}dinger equation in the region \(\abs{x} \leq a\), which now reads
 \begin{equation}
@@ -53,6 +97,285 @@ For a non-trivial solution where \(\chi \neq 0\), we need one of the following t
 This allows us to find the allowed energy levels (the eigenvalues of the Hamiltonians) to be
 \begin{equation}
     E_n = \frac{\hbar^2 k_n^2}{2 m} = \frac{n^2 \pi^2 \hbar^2}{8 m a^2} \qfor n \in \NN.
+\end{equation}
+
+To enforce normalisation conditions on \(\chi_n\), we require
+\begin{equation}
+    \int_{-a}^{a} \abs{\chi_n \pqty{x}}^2 \dd{x} = 1,
+\end{equation}
+which solves to constants
+\begin{equation}
+    A = B = \exp\pqty{i \alpha} \sqrt{\frac{1}{a}} \qfor \alpha \in \RR.
+\end{equation}
+
+Of course, we can always fix \(\alpha = 0\) without loss of generality, and we have the final normalised eigenfunctions
+\begin{equation}
+    \chi_n\pqty{x} = \sqrt{\frac{1}{a}}
+    \begin{cases}
+        \sin \pqty{\frac{n \pi x}{2a}}, & n \text{ even}, \\
+        \cos \pqty{\frac{n \pi x}{2a}}, & n \text{ odd}.
+    \end{cases}
+\end{equation}
+
+The first three functions are plotted in \autoref{fig:infinite-well-eigenfunctions}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = \(x\),
+            ylabel = \(y\),
+            xmin = -1.2,
+            xmax = 1.2,
+            ymin = -1.3,
+            ymax = 1.3,
+            xtick = {-1, 0, 1},
+            xticklabels = {\(-a\), \(0\), \(a\)},
+            ytick = {-1, 0, 1},
+            yticklabels = {\(-\flatfrac{1}{\sqrt{a}}\), \(0\), \(\flatfrac{1}{\sqrt{a}}\)},
+            samples = 200,
+            legend pos = south east,
+            width = 0.8\textwidth,
+            height = 0.45\textwidth,
+        ]
+            \addplot[red, thick, domain=-1:1] {cos(deg(pi*x/2))};
+            \addlegendentry{\(\chi_1\)};
+            \addplot[blue, thick, domain=-1:1] {sin(deg(pi*x))};
+            \addlegendentry{\(\chi_2\)};
+            \addplot[black, thick, domain=-1:1] {cos(deg(3*pi*x/2))};
+            \addlegendentry{\(\chi_3\)};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Eigenfunctions \(\chi_1\), \(\chi_2\), and \(\chi_3\)}
+    \label{fig:infinite-well-eigenfunctions}%
+\end{figure}
+
+In particular, the ground state function has no nodes, and the \(n\)-th excited state (which is \(\chi_{n - 1}\)) has \(n\) nodes. The energy levels are quantised, and in particular the lowest energy state \(E_1\) is non-zero. The eigenfunctions also alternate between even and odd functions.
+
+As \(n \to \infty\), we recover the classical limit, since a rapidly-oscillating wavefunction will have a probability density that is approximately uniform over the well.
+
+\begin{lemma}[Parity of Eigenfunctions]
+    Suppose that the spectrum of bound states of a quantum system is non-degenerate, i.e., \(E_i \neq E_j\) for \(i \neq j\). Of the potential satisfies \(U\pqty{x} = U\pqty{-x}\), the eigenfunctions \(\chi_n\) are either even or odd functions.
+\end{lemma}
+
+\begin{proof}
+    If \(U\) is even, then the time-independent Schr\"{o}dinger equation is invariant under the transformation \(x \mapsto -x\).
+    
+    Hence, if \(\chi_n\) is an eigenfunction with eigenvalue \(E_n\), then \(\chi_n\pqty{-x}\) is also an eigenfunction with the same eigenvalue. But since the spectrum is non-degenerate, we must have \(\chi_n\pqty{-x} = \lambda \chi_n\pqty{x}\) for some constant \(\lambda\).
+
+    But note \(\chi\pqty{x} = \chi\pqty{-\pqty{-x}} = \lambda \chi\pqty{-x} = \lambda^2 \chi\pqty{x}\), and hence \(\lambda^2 = 1\). Therefore, \(\lambda = \pm 1\), and the eigenfunction is either even or odd.
+\end{proof}
+
+\subsubsection{Finite Potential Well}
+
+Suppose we have some finite potential in \autoref{fig:finite-well}, defined by
+\begin{equation}
+    U\pqty{x} = \begin{cases}
+        0, & \qfor \abs{x} \leq a, \\
+        U_0, & \qfor \abs{x} > a,
+    \end{cases}
+\end{equation}
+for some \(U_0 \in \RR\) and \(U_0 > 0\), and \(a > 0\). Since we look for bound states, we require \(0 \leq E < U_0\).
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = \(x\),
+            ylabel = \(U\pqty{x}\),
+            xmin = -2.2,
+            xmax = 2.2,
+            ymin = -0.2,
+            ymax = 1.3,
+            xtick = {-1, 1},
+            xticklabels = {\(-a\), \(a\)},
+            ytick = {1},
+            yticklabels = {\(U_0\)},
+            width = 0.7\textwidth,
+            height = 0.35\textwidth,
+        ]
+            \addplot[blue, very thick] coordinates {
+                (-2, 1)
+                (-1, 1)
+            };
+
+            \addplot[blue, very thick] coordinates {
+                (1, 1)
+                (2, 1)
+            };
+
+            \addplot[blue, very thick] coordinates {
+                (-1, 0)
+                (1, 0)
+            };
+
+            \addplot[blue, very thick,dashed] coordinates {
+                (-1, 0)
+                (-1, 1)
+            };
+
+            \addplot[blue, very thick, dashed] coordinates {
+                (1, 0)
+                (1, 1)
+            };
+
+            \addplot[dashed] coordinates {
+                (-1, 1)
+                (1, 1)
+            };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Finite Square Potential Well}
+    \label{fig:finite-well}%
+\end{figure}
+
+The time-independent Schr\"{o}dinger equation reads
+\begin{subequations}
+    \begin{align}
+        \label{eq:finite-well-schrodinger-1}
+        - \frac{\hbar^2}{2 m} \chi'' &= E \chi, & \qfor \abs{x} \leq a, \\
+        \label{eq:finite-well-schrodinger-2}
+        - \frac{\hbar^2}{2 m} \chi'' &= \pqty{E - U_0} \chi, & \qfor \abs{x} > a.
+    \end{align}
+\end{subequations}
+
+Note that \eqref{eq:finite-well-schrodinger-1} gives \(\chi'' + k^2 \chi = 0\), and hence the solutions are
+\begin{equation}
+    \chi\pqty{x} = A \sin\pqty{k x} + B \cos\pqty{k x}, \quad k^2 = \frac{2 m E}{\hbar^2},
+\end{equation}
+while \eqref{eq:finite-well-schrodinger-2} gives \(\chi'' - \overline{k}^2 \chi = 0\), and hence the solutions are
+\begin{equation}
+    \chi\pqty{x} = C e^{\overline{k} x} + D e^{-\overline{k} x}, \quad \overline{k}^2 = \frac{2 m \pqty{U_0 - E}}{\hbar^2}.
+\end{equation}
+
+Imposing square-integrability gives \(C = 0\) for \(x > a\), and \(D = 0\) for \(x < -a\).
+
+For odd eigenfunctions. \textbf{\textcolor{red}{See Example Sheet.}}
+
+We look for even eigenfunctions, so we set \(A = 0\) and \(C = D\). Then we have
+\begin{equation}
+    \chi\pqty{x} = \begin{cases}
+        C e^{\overline{k} x}, & \qfor x < -a, \\
+        B \cos\pqty{k x}, & \qfor \abs{x} \leq a, \\
+        C e^{-\overline{k} x}, & \qfor x > a, \\
+    \end{cases}
+\end{equation}
+and imposing continuity conditions of \(\chi\) and \(\chi'\) at \(\pm a\) gives
+\begin{subequations}
+    \begin{align}
+        C e^{-\overline{k} a} &= B \cos\pqty{k a}, \\
+        - \overline{k} C e^{-\overline{k} a} &= - k B \sin\pqty{k a}.
+    \end{align}
+\end{subequations}
+
+Taking ratios gives \(k \tan \pqty{ka} = \overline{k}\), and hence putting this back in, we have \(k^2 + \overline{k}^2 = \frac{2 m U_0}{\hbar^2}\). Hence, we have a system of transcedental equations
+\begin{subequations}
+    \begin{align}
+        \xi \tan \xi &= \eta, \\
+        \xi^2 + \eta^2 &= r_0^2,
+    \end{align}
+    where
+    \begin{align}
+        \xi &= k a = \frac{a}{\hbar} \sqrt{2 m E}, \\
+        \eta &= \overline{k} a = \frac{a}{\hbar} \sqrt{2 m \pqty{U_0 - E}}, \\
+        r_0^2 &= \frac{2 m U_0 a^2}{\hbar^2}.
+    \end{align}
+\end{subequations}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = \(\xi\),
+            ylabel = \(\eta\),
+            xmin = 0,
+            xmax = 5,
+            ymin = 0,
+            ymax = 5,
+            xtick = {0, 1.252353, pi, 3.595305, 4},
+            xticklabels = {\(0\), \(\xi_1\), \(\pi\), \(\xi_2\), \(r_0\)},
+            ytick = {0, 4},
+            yticklabels = {0, \(r_0\)},
+            samples = 300,
+            legend pos = north east,
+            width = 0.55\textwidth,
+            height = 0.55\textwidth,
+            unbounded coords = jump,
+            restrict y to domain = 0:4.5,
+        ]
+            \addplot[blue, thick, domain=0:4.5] {x*tan(deg(x))};
+            \addlegendentry{\(\eta = \xi \tan \xi\)};
+            \addplot[red, thick, domain=0:4] {sqrt(16 - x^2)};
+            \addlegendentry{\(\xi^2 + \eta^2 = r_0^2,\)};
+            \addplot[black, only marks, mark=*] coordinates {
+                (1.252353, 3.798896)
+                (3.595305, 1.753221)
+            };
+            \draw[dotted] (axis cs:1.252353,0) -- (axis cs:1.252353,3.798896);
+            \draw[dotted] (axis cs:3.595305,0) -- (axis cs:3.595305,1.753221);
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Graphical Solution of the Transcendental Equations}
+\end{figure}
+
+Note that plotting this out, there are only \emph{finitely} many intersections, say \(\xi_1, \xi_2, \ldots,\xi_p\). Then the corresponding energy levels are given by
+\begin{equation}
+    E_n = \frac{\hbar^2 \xi_n^2}{2 m a^2} \qfor n = 1, 2, \ldots, p.
+\end{equation}
+
+We may write \(C = C\pqty{B}\) in terms of \(B\), and normalise to find \(C\). We also see that taking \(U_0 \to \infty\) and \(r_0 \to \infty\), we recover the infinite potential well case: here, we see that \(\xi_n \to \flatfrac{n \pi}{2}\) for \(n = 1, 2, \ldots\).
+
+\subsubsection{Harmonic Oscillator}
+
+Now, as in \autoref{fig:harmonic-oscillator}, take \(U\pqty{x} = \frac{1}{2} k x^2\) for some \term{elastic constant} \(k > 0\), and \(\omega = \sqrt{\flatfrac{k}{m}}\) to be the \term{frequency} of oscillation, and \(k = m \omega^2\).
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = \(x\),
+            ylabel = \(U\pqty{x}\),
+            xmin = -3.5,
+            xmax = 3.5,
+            ymin = -0.2,
+            ymax = 5,
+            xtick = \empty,
+            ytick = \empty,
+            width = 0.4\textwidth,
+            height = 0.4\textwidth,
+        ]
+            \addplot[blue, very thick, domain=-3:3] {0.5*x^2};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Harmonic Oscillator Potential}
+    \label{fig:harmonic-oscillator}%
+\end{figure}
+
+In classical mechanics, Newton's equation reads \(\ddot{x} = - \omega^2 x\), and the solution is
+\begin{equation}
+    x\pqty{t} = A \cos \pqty{\omega t} + B \sin \pqty{\omega t},
+\end{equation}
+for some \(A, B \in \RR\).
+
+On the other hand, in quantum mechanics, the time-independent Schr\"{o}dinger equation reads
+\begin{equation}
+    - \frac{\hbar^2}{2 m} \chi'' + \frac{1}{2} m \omega^2 x^2 \chi = E \chi.
+\end{equation}
+
+Using a change of variables given by
+\begin{subequations}
+    \begin{align}
+        \xi^2 &= \frac{m \omega}{\hbar} x^2, \\
+        \epsilon &= \frac{2 E}{\hbar \omega},
+    \end{align}
+\end{subequations}
+this reads
+\begin{equation}
+    - \chi'' + \xi^2 \chi = \epsilon \chi.
 \end{equation}
 
 \subsection{Free Particle}
