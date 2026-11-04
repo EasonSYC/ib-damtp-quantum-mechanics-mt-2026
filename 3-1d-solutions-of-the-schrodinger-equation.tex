@@ -375,9 +375,216 @@ Using a change of variables given by
 \end{subequations}
 this reads
 \begin{equation}
-    - \chi'' + \xi^2 \chi = \epsilon \chi.
+    - \dv[2]{\chi}{\xi} + \xi^2 \chi = \epsilon \chi.
 \end{equation}
 
+We start from a particular solution \(\epsilon = 1\) which gives
+\begin{equation}
+    \chi_0\pqty{\xi} = e^{-\flatfrac{\xi^2}{2}}.
+\end{equation}
+
+This implies that \(E_0 = \flatfrac{\hbar \omega}{2}\), and the solution is
+\begin{equation}
+    \chi_0 \pqty{x} = e^{-\flatfrac{m \omega x^2}{2 \hbar}}.
+\end{equation}
+
+To find other eigenfunctions of the Hamiltonian \(\hat{H}\), we consider the change of variable
+\begin{equation}
+    \chi\pqty{\xi} = f\pqty{\xi} e^{-\flatfrac{\xi^2}{2}},
+\end{equation}
+and substituting this recovers a second-order differential equation for \(f = f\pqty{\xi}\):
+\begin{equation}
+    - f'' + 2 \xi f' + \pqty{1 - \epsilon} f = 0.
+\end{equation}
+
+Note that \(\epsilon = 1\) indeed gives constant \(f\) as a solution. Since \(\xi = 0\) is an ordinary point, recall from \textit{IA Differential Equations} that we can look for a power series solution of the form
+\begin{subequations}
+    \begin{equation}
+        \label{eq:power-series-solution}%
+        f\pqty{\xi} = \sum_{n = 0}^{\infty} a_n \xi^n,
+    \end{equation}
+    for coefficients \(a_n \in \RR\). Differentiating gives us
+    \begin{align}
+        f'\pqty{\xi} &= \sum_{n = 1}^{\infty} n a_n \xi^{n - 1}, \\
+        f''\pqty{\xi} &= \sum_{n = 2}^{\infty} n \pqty{n - 1} a_n \xi^{n - 2},
+    \end{align}
+\end{subequations}
+and plugging this into the differential equation gives
+\begin{equation}
+    \sum_{n = 0}^{\infty} \bqty{\pqty{n + 1} \pqty{n + 2} a_{n + 2} - 2n a_n + \pqty{\epsilon - 1} a_n} \xi^n = 0.
+\end{equation}
+
+This gives a recursive relation for the coefficients \(a_n\)
+\begin{equation}
+    \label{eq:recursion-relation-for-harmonic-oscillator}%
+    a_{n + 2} = \frac{2 n + 1 - \epsilon}{\pqty{n + 1} \pqty{n + 2}} a_n.
+\end{equation}
+
+This gives two linearly independent solutions for each \(\epsilon\), one for even \(n\) and one for odd \(n\), corresponding to our odd and even eigenfunctions. We further require to solve to a \emph{bound} state, so the solution has to be square integrable.
+
+\begin{proposition}[Normalisability of Harmonic Oscillator Eigenfunctions]
+    If the series of \eqref{eq:power-series-solution} does not terminate, then the solution is not normalisable.
+\end{proposition}
+
+\begin{proof}
+    Suppose the power series does not terminate, then by \eqref{eq:recursion-relation-for-harmonic-oscillator} tells us that \(\flatfrac{a_{n + 2}}{a_n} \sim \flatfrac{2}{n}\) as \(n \to \infty\). Then examining the function \(g\pqty{\xi} = e^{\xi^2}\), it has power series expansion
+    \begin{equation}
+        g\pqty{\xi} = \sum_{n = 0}^{\infty} \frac{\xi^{2 n}}{n!},
+    \end{equation}
+    and hence \(\flatfrac{b_{n + 2}}{b_n} = \flatfrac{1}{\pqty{n + 1}} \sim \flatfrac{1}{n}\) as \(n \to \infty\). Hence, \(f\pqty{\xi}\) and \(e^{\xi^2}\) have identical asymptotic behaviour, so
+    \begin{equation}
+        \chi\pqty{\xi} \sim f\pqty{\xi} e^{-\flatfrac{\xi^2}{2}} \sim e^{\flatfrac{\xi^2}{2}} 
+    \end{equation}
+    and hence \(\xi\) is not normalisable.
+\end{proof}
+
+This implies that we will have a polynomial solution for \(f\pqty{\xi}\). So this means that we require \(2 n + 1 - \epsilon = 0\) for some \(n \in \NN\), and hence the energy levels are quantised to be
+\begin{equation}
+    E_n = \flatfrac{\hbar \omega}{2} \pqty{2 n + 1} \qfor n = 0, 1, 2, \ldots
+\end{equation}
+
+\(N = 0\) recovers the constant solution, and note that the consecutive energy gaps are \(E_{n + 1} - E_n = \hbar \omega\). The corresponding eigenfunctions \(f_n\pqty{\xi}\) are known as the \term{Hermite polynomials}, and are given by
+\begin{equation}
+    f_n\pqty{\xi} = \pqty{-1}^{n} e^{\xi^2} \dv[n]{\xi} e^{-\xi^2}.
+\end{equation}
+
+The first few values are tabulated in \autoref{tab:harmonic-oscillator-eigenfunctions}.
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{clll}
+        \toprule
+        \(N\) & \(E_N\) & \(f_N\pqty{\xi}\) & \(\chi_N\pqty{\xi}\)\\
+        \midrule
+        0 & \(\flatfrac{\hbar \omega}{2}\) & \(1\) & \(e^{-\flatfrac{\xi^2}{2}}\) \\
+        1 & \(\flatfrac{3 \hbar \omega}{2}\) & \(2 \xi\) & \(\xi e^{-\flatfrac{\xi^2}{2}}\) \\
+        2 & \(\flatfrac{5 \hbar \omega}{2}\) & \(4 \xi^2 - 2\) & \(\pqty{2 \xi^2 - 1} e^{-\flatfrac{\xi^2}{2}}\) \\
+        3 & \(\flatfrac{7 \hbar \omega}{2}\) & \(8 \xi^3 - 12 \xi\) & \(\pqty{2 \xi^3 - 3 \xi} e^{-\flatfrac{\xi^2}{2}}\) \\
+        4 & \(\flatfrac{9 \hbar \omega}{2}\) & \(16 \xi^4 - 48 \xi^2 + 12\) & \(\pqty{4 \xi^4 - 12 \xi^2 + 3} e^{-\flatfrac{\xi^2}{2}}\) \\
+        \bottomrule
+    \end{tabular}
+    \caption{The first few Hermite Polynomials and Corresponding Energy Levels}
+    \label{tab:harmonic-oscillator-eigenfunctions}%
+\end{table}
+
+Then the eigenfunctions are given by
+\begin{equation}
+    \chi_N \pqty{\xi} = f_n\pqty{\xi} e^{-\flatfrac{\xi^2}{2}},
+\end{equation}
+and notice the parity of the solution satisfies \(\chi_n\pqty{-\xi} = \pqty{-1}^{n} \chi_n\pqty{\xi}\), i.e., the eigenfunctions alternate between even and odd functions.
+
 \subsection{Free Particle}
+
+We study \term{free particles} with \(U\pqty{x} = 0\). Then the time-independent Schr\"{o}dinger equation reads
+\begin{equation}
+    - \frac{\hbar^2}{2 m} \chi'' = E \chi,
+\end{equation}
+and setting \(k^2 = \flatfrac{2 m E}{\hbar^2}\), we have the general solution
+\begin{equation}
+    \chi\pqty{x} = A e^{i k x} + B e^{- i k x},
+\end{equation}
+and since energy only depends on \(k^2\), we could label the eigenfunctions with \emph{continuous} parameter \(k \in \RR\) for
+\begin{subequations}
+    \begin{align}
+        \chi_k\pqty{x} &= e^{i k x}, \\
+        E_k &= \frac{\hbar^2 k^2}{2 m}.
+    \end{align}
+\end{subequations}
+
+Putting this into the time-dependent Schr\"{o}dinger equation, we have
+\begin{equation}
+    \psi_k\pqty{x, t} = e^{i k x} e^{- i E_k t / \hbar} = e^{i k x - i \pqty{\flatfrac{\hbar k^2}{2 m}} t}.
+\end{equation}
+
+This solution is known as the \term{de Broglie wave} or the \term{plane wave} solution. But note that this solution is \emph{not} normalisable, as
+\begin{equation}
+    \int_{\minusinfty}^{\plusinfty} \abs{\psi_k\pqty{x, t}}^2 \dd{x} = \int_{\minusinfty}^{\plusinfty} 1 \dd{x} = \infty.
+\end{equation}
+
+We may:
+\begin{itemize}
+    \item attempt to build a linear superposition of \(\chi_k\) to form a normalisable solution, or
+    \item consider a particle to move on a finite interval, for example, a circle of radius \(R\) with additional periodicity conditions, or
+    \item interpret the solution as a \emph{scattering state} as a stream of particles, which we will discuss in the next section.
+\end{itemize}
+
+\subsubsection{Gaussian Wavepackets}
+
+For a continuous parameter, superposition is now given by
+\begin{equation}
+    \psi\pqty{x, t} = \int_{\minusinfty}^{\plusinfty} A\pqty{k} \psi_k \pqty{x, t} \dd{k},
+\end{equation}
+where \(A\pqty{k} \in \RR\) is some ``coefficient'' function. A possible option is the \term{Gaussian wavepacket}, defined by
+\begin{equation}
+    A\pqty{k} = A_{\text{GP}} \pqty{k} = \exp\pqty{- \frac{\pqty{k - k_0}^2}{2 \sigma^2} + \frac{k_0^2}{2 \sigma^2}},
+\end{equation}
+for parameters \(\sigma > 0\) and \(k_0 \in \RR\). A particular example is shown in \autoref{fig:gaussian-wavepacket}; the width of this Gaussian is given by \(\sigma\), and its peak is at \(k_0\).
+
+\begin{remark}
+    Notice that the \(\sigma\) used here is the square root of the reciprocal of that used by the lecturer in the lecture notes (Maria Ubiali, Michaelmas 2026). This would not really matter after the introduction of \(\alpha\) and \(\beta\) below. The constant factor \(\flatfrac{k_0^2}{2 \sigma^2}\) is included in the exponent to set \(A_{\text{GP}}\pqty{0} = 1\); it also cancels the constant term when the exponent is expanded. This differs from David Tong's textbook, where \(\sigma\) is used in place of \(\sigma^2\); here, \(\sigma\) is the usual width parameter (standard deviation) of the Gaussian.
+\end{remark}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = \(k\),
+            ylabel = \(A_{\text{GP}}\pqty{k}\),
+            xmin = -3.2,
+            xmax = 3.2,
+            ymin = -0.1,
+            ymax = 1.1,
+            xtick = \empty,
+            ytick = {1},
+            yticklabels = {\(k_0\)},
+            samples = 200,
+            width = 0.8\textwidth,
+            height = 0.45\textwidth,
+        ]
+            \addplot[blue, very thick, domain=-3:3] {exp(-x^2 / 2)};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Gaussian Wavepacket \(A_{\text{GP}}\pqty{k}\)}
+    \label{fig:gaussian-wavepacket}%
+\end{figure}
+
+Then integrating gives us
+\begin{subequations}
+    \begin{align}
+        \psi_{\text{GP}} \pqty{x, t} &= \int_{\minusinfty}^{\plusinfty} A_{\text{GP}}\pqty{k} \psi_k \pqty{x, t} \dd{k} \\
+        &= \int_{\minusinfty}^{\plusinfty} \exp\pqty{F\pqty{k}} \dd{k},
+    \end{align}
+    where \(F\pqty{k}\) is given by
+    \begin{align}
+        F\pqty{k} &= - \frac{1}{2\sigma^2} \pqty{k^2 - 2 k k_0} + i k x - i \frac{\hbar k^2}{2 m} t \\
+        &= - \frac{1}{2} \pqty{\frac{1}{\sigma^2} + i \frac{\hbar t}{m}} k^2 + \pqty{\frac{k_0}{\sigma^2} + i x} k.
+    \end{align}
+\end{subequations}
+
+For notation purposes, let
+\begin{equation}
+    \alpha = \frac{1}{\sigma^2} + i \frac{\hbar t}{m}, \quad \beta = \frac{k_0}{\sigma^2} + i x,
+\end{equation}
+then by completing the square, we observe that
+\begin{equation}
+    F\pqty{k} = - \frac{\alpha}{2} \pqty{k - \frac{\beta}{\alpha}}^2 + \frac{\beta^2}{2 \alpha}.
+\end{equation}
+
+This gives us
+\begin{equation}
+    \psi_{\text{GP}} \pqty{x, t} = \exp\pqty{\frac{\beta^2}{2 \alpha}} \int_{\minusinfty}^{\plusinfty} \exp\pqty{- \frac{\alpha}{2} \pqty{k - \frac{\beta}{\alpha}}^2} \dd{k}.
+\end{equation}
+
+Recall the shifted Gaussian integral
+\begin{equation}
+    \int_{\minusinfty}^{\plusinfty} \exp\pqty{- \frac{\alpha}{2} \pqty{k - \gamma}^2} \dd{k} = \sqrt{\frac{2 \pi}{\alpha}},
+\end{equation}
+which holds for any \(\gamma\) when \(\alpha > 0\) is real, and also for complex \(\alpha\) with \(\Re\pqty{\alpha} > 0\). Hence, we have
+\begin{equation}
+    \psi_{\text{GP}} \pqty{x, t} = \sqrt{\frac{2 \pi}{\alpha\pqty{t}}} \exp\pqty{\frac{\beta\pqty{x}^2}{2 \alpha\pqty{t}}}.
+\end{equation}
+
+This recovers a Gaussian, now in space, with a time-dependent width.
 
 \subsection{Scattering States}
