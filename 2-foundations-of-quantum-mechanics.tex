@@ -324,12 +324,12 @@ Consider measuring the value of a selected die from \(\infty\) rolls. The probab
 The expectation value of an observable \(O\) is the mean of an infinite series of measurements performed on all particles in the same state \(\psi\), given by (in one-dimension)
 \begin{subequations}
     \begin{align}
-        \ev{x} &= \int_{\minusinfty}^{\plusinfty} \dd{x} x \abs{\psi\pqty{\vb{x}, t}}^2 \\
+        \ev{\hat{x}} &= \int_{\minusinfty}^{\plusinfty} \dd{x} x \abs{\psi\pqty{\vb{x}, t}}^2 \\
         &= \int_{\minusinfty}^{\plusinfty} \dd{x} \psi^{\ast} \pqty{\vb{x}, t} x \psi\pqty{\vb{x}, t},
     \end{align}
     and
     \begin{align}
-        \ev{p} &= m \dv{\ev{x}}{t} \\
+        \ev{\hat{p}} &= m \dv{\ev{x}}{t} \\
         &= m \dv{t} \int_{\minusinfty}^{\plusinfty} \dd{x} \psi^{\ast} x \psi \\
         &= \frac{i \hbar m}{2m} \int_{\minusinfty}^{\plusinfty} \dd{x}x \pdv{x} \pqty{\psi \pdv{\psi^{\ast}}{x} - \psi^{\ast} \pdv{\psi}{x}} \\
         &= \int_{\minusinfty}^{\plusinfty} \dd{x} \psi^{\ast} \pqty{- i \hbar \pdv{x}} \psi,
