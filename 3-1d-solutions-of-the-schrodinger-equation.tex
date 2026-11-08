@@ -5,10 +5,16 @@ We first note that from the time-dependent Schr\"{o}dinger equation, if the pote
 \subsection{Bound States}
 
 \begin{definition}[Bound State]
-    A \term{bound state} is a state of a quantum system whose wavefunction \(\psi\) is normalisable, i.e., \(\int \abs{\psi\pqty{x}}^2 \dd{x} < \infty\). 
+    A \term{bound state} is an eigenstate of a quantum system whose wavefunction \(\psi\) is normalisable, i.e., \(\int \abs{\psi\pqty{x}}^2 \dd{x} < \infty\). Otherwise, the state is called a \term{unbounded} or \term{scattering} state.
 \end{definition}
 
-Bound states (usually) have energy \(E\) is less than the potential at infinity, and has quantised/discrete energy levels.
+Bound states (usually) have energy \(E\) is less than the potential at infinity, and has quantised/discrete energy levels. The term arises from that
+\begin{equation}
+    \lim_{R \to \infty} \int_{\abs{x} > R} \abs{\psi\pqty{x}}^2 \dd{x} = 0,
+\end{equation}
+so the particle is ``bound'' to a finite region of space. In particular, the particle cannot escape to infinity. Furthermore, we have \(\ev{\hat{p}} = 0\).
+
+On the other hand, scattering states have continuous energy levels.
 
 \subsubsection{Infinite Potential Well}
 
@@ -585,6 +591,179 @@ which holds for any \(\gamma\) when \(\alpha > 0\) is real, and also for complex
     \psi_{\text{GP}} \pqty{x, t} = \sqrt{\frac{2 \pi}{\alpha\pqty{t}}} \exp\pqty{\frac{\beta\pqty{x}^2}{2 \alpha\pqty{t}}}.
 \end{equation}
 
-This recovers a Gaussian, now in space, with a time-dependent width.
+We substitutes back \(\beta = \flatfrac{k_0}{\sigma^2} + i x\) gives us
+\begin{equation}
+    \psi_{\text{GP}} \pqty{x, t} = \sqrt{\frac{2 \pi}{\alpha\pqty{t}}} \exp\pqty{- \frac{1}{2 \alpha\pqty{t}} \pqty{x - \frac{i k_0}{\sigma^2}}^2}.
+\end{equation}
+
+We introduce a normalisation constant \(C\), and write
+\begin{equation}
+    \rho_{\text{GP}} \pqty{x, t} = C \abs{\psi_{\text{GP}} \pqty{x, t}}^2.
+\end{equation}
+
+Then we have
+\begin{subequations}
+    \begin{align}
+        \rho_{\text{GP}} \pqty{x, t} &= \frac{2 \pi C}{\abs{\alpha}} \exp\pqty{- \frac{1}{2 \alpha} \pqty{x - \frac{i k_0}{\sigma^2}}^2 - \frac{1}{2 \alpha\conjstar} \pqty{x + \frac{i k_0}{\sigma^2}}^2} \\
+        &= \frac{2 \pi C e^{\flatfrac{k_0^2}{\sigma^2}}}{\abs{\alpha}} \exp\pqty{- \frac{1}{\sigma^2 \abs{\alpha}^2} \pqty{x - \frac{\hbar k_0}{m} t}^2},
+    \end{align}
+\end{subequations}
+and one may check that the normalisation constant is given by
+\begin{equation}
+    C = \frac{e^{-\flatfrac{k_0^2}{\sigma^2}}}{\sqrt{4 \sigma^2 \pi^3}}.
+\end{equation}
+
+This means that the probability density is a Gaussian in space, centred at \(x = \frac{\hbar k_0}{m} t\), with a time-dependent width given by
+\begin{equation}
+    \sigma_x\pqty{t} = \sqrt{\frac{\sigma^2 \abs{a}^2}{2}} = \sqrt{\frac{1}{2} \pqty{\sigma^2 + \frac{\hbar^2 t^2}{m^2 \sigma^2}}}.
+\end{equation}
+
+We may now compute the expected value and the variance (which is the uncertainty squared, defined similarly to the variance in probability theory) of the position and the momentum. We have, as expected,
+\begin{subequations}
+    \begin{align}
+        \ev{\hat{x}}_{\text{GP}} &= \frac{\hbar k_0}{m} t, \\
+        \Delta x_{\text{GP}}^2 &= \frac{1}{2} \pqty{\sigma^2 + \frac{\hbar^2 t^2}{m^2 \sigma^2}}, \\
+        \ev{\hat{p}}_{\text{GP}} &= \hbar k_0, \\
+        \Delta p_{\text{GP}}^2 &= \frac{\hbar^2 \sigma^2}{2}.
+    \end{align}
+\end{subequations}
+
+This allows us to see the \term{Heisenberg uncertainty relation} at play: at \(t = 0\), we have \(\Delta x_{\text{GP}} \Delta p_{\text{GP}} = \flatfrac{\hbar}{2}\), which is the minimum uncertainty allowed by quantum mechanics. As time progresses, the wavepacket spreads out, and the uncertainty in position increases, having \(\Delta x_{\text{GP}} \Delta p_{\text{GP}} > \flatfrac{\hbar}{2}\) for \(t > 0\).
+
+\subsection{Beam Interpretation}
+
+Another possible interpretation is that we simply ignore the whole normalisation problem, and take the function \(\chi_k = e^{i k x}\) to be an eigenfunction of \(\hat{H}\). This gives a solution to the time-dependent Schr\"{o}dinger equation given by
+\begin{equation}
+    \psi_k\pqty{x, t} = A e^{i k x - i \flatfrac{\hbar k^2}{2 m} t},
+\end{equation}
+for some complex constant \(A \in \CC\).
+
+This is the \term{plane wave} solution. Instead of interpreting this as describing a \emph{single} particle, we claim that each wavefunction describes a \term{beam of particles}, each with momentum and energy
+\begin{subequations}
+    \begin{align}
+        p_k &= \hbar k, \\
+        E_k &= \frac{\hbar^2 k^2}{2 m},
+    \end{align}
+\end{subequations}
+and with the average density of particles given by \(\abs{\psi_k\pqty{x, t}}^2 = \abs{A^2}\).
+
+We compute the \term{probability current} \(J_k\pqty{x, t}\). Recall we used this to prove the conservation of probability back when we first introduced normalisation, using \(\dv*{\rho}{t} + \nabla \cdot J = 0\). This is given by
+\begin{equation}
+    J_k \pqty{x, t} = - \frac{i \hbar}{2 m} \pqty{\psi_k^* \pdv{\psi_k}{x} - \psi_k \pdv{\psi_k^*}{x}} = \frac{\hbar k}{m} \abs{A}^2 = \frac{p_k}{m} \abs{A}^2,
+\end{equation}
+and this gives the \term{average flux} of the particles in the beam, which is the number of particles per unit time per unit area.
 
 \subsection{Scattering States}
+
+Now we look at a particle approaching a potential barrier. As a quantum particle, the particle may either be reflected or transmitted through the barrier -- or both. Without loss of generality, we set up a potential barrier at zero. An illustrative example is shown in \autoref{fig:reflection-transmission-coefficients}.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig/reflection-transmission-coefficients.png}
+    \caption{Scattering off a Potential Barrier}
+    \label{fig:reflection-transmission-coefficients}%
+\end{figure}
+
+\begin{definition}[Reflection and Transmission Coefficients]
+    The probability for the incoming particle to be reflected is given by the \term{reflection coefficient} \(R\), with
+    \begin{subequations}
+        \begin{equation}
+            R = \lim_{t \to \plusinfty} \int_{\minusinfty}^{0} \abs{\psi\pqty{x, t}}^2 \dd{x},
+        \end{equation}
+    and the probability for the incoming particle to be transmitted is given by the \term{transmission coefficient} \(T\), with
+        \begin{equation}
+            T = \lim_{t \to \plusinfty} \int_{0}^{\plusinfty} \abs{\psi\pqty{x, t}}^2 \dd{x}.
+        \end{equation}
+    \end{subequations}
+\end{definition}
+
+Clearly we have the relation \(R + T = 1\). In the beam interpretation, \(R\) is then the fraction of particles of the beam that are reflected, and \(T\) is the fraction of particles of the beam that are transmitted.
+
+\subsubsection{Scattering off a Potential Step}
+
+Consider a step potential given by
+\begin{equation}
+    U\pqty{x} = \begin{cases}
+        0, & \qfor x < 0, \\
+        U_0, & \qfor x \geq 0,
+    \end{cases}
+\end{equation}
+for some \(U_0 > 0\), which is sketched in \autoref{fig:potential-step}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = \(x\),
+            ylabel = \(U\pqty{x}\),
+            xmin = -2.2,
+            xmax = 2.2,
+            ymin = -0.2,
+            ymax = 1.3,
+            xtick = {0},
+            ytick = {1},
+            yticklabels = {\(U_0\)},
+            width = 0.7\textwidth,
+            height = 0.35\textwidth,
+        ]
+            \addplot[blue, very thick] coordinates { (-2, 0) (0, 0) };
+            \addplot[blue, very thick, dashed] coordinates { (0, 0) (0, 1) };
+            \addplot[blue, very thick] coordinates { (0, 1) (2, 1) };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Step Potential}
+    \label{fig:potential-step}%
+\end{figure}
+
+Then the time-independent Schr\"{o}dinger equation reads
+\begin{equation}
+    - \frac{\hbar^2}{2 m} \chi'' + U\pqty{x} \chi = E \chi.
+\end{equation}
+
+In the region \(x \leq 0\), we have \(U\pqty{x} = 0\), so this solves to give
+\begin{equation}
+    \chi\pqty{x} = A e^{i k x} + B e^{- i k x}, \quad k^2 = \frac{2 m E}{\hbar^2}.
+\end{equation}
+
+The first term corresponds to a wave travelling to the right (the incident wave), and the second term corresponds to a wave travelling to the left (the reflected wave). They must have the same energy, but the densities of the wave \(A\) and \(B\) are allowed to differ, and in general, we expect \(B < A\) telling us that not everything is reflected.
+
+In the region where \(x > 0\), we have \(U\pqty{x} = U_0\), so this solves to give
+\begin{equation}
+    \chi\pqty{x} = C e^{i \overline{k} x} + D e^{- i \overline{k} x}, \quad \overline{k}^2 = \frac{2 m \pqty{E - U_0}}{\hbar^2},
+\end{equation}
+where \(\overline{k}\) is real if \(E > U_0\), and imaginary if \(E < U_0\). The first term corresponds to a wave travelling to the right (the transmitted wave). However, the interpretation of the second term is more subtle: if \(\overline{k}\) is real, then it corresponds to a wave travelling to the left, which could be unphysical if our initial condition is that we expect no incoming wave from the right. If \(\overline{k}\) is imaginary, then the second term grows exponentially as \(x \to \plusinfty\), which is definitely unphysical. Hence, we should look for solutions where \(D = 0\) in both cases.
+
+We look at the case \(E \geq U_0\) first, where \(\overline{k}\) is real. Then the whole solution is given by
+\begin{equation}
+    \chi_{k, \overline{k}} \pqty{x} = \begin{cases}
+        A e^{i k x} + B e^{- i k x}, & \qfor x < 0, \\
+        C e^{i \overline{k} x}, & \qfor x > 0,
+    \end{cases}
+\end{equation}
+and imposing continuity of \(\chi\) and \(\chi'\) at \(x = 0\) gives us
+\begin{subequations}
+    \begin{align}
+        A + B &= C, \\
+        i k A - i k B &= i \overline{k} C.
+    \end{align}
+\end{subequations}
+
+Therefore, the coefficients solve to
+\begin{subequations}
+    \begin{align}
+        B &= \frac{k - \overline{k}}{k + \overline{k}} A, \\
+        C &= \frac{2 k}{k + \overline{k}} A.
+    \end{align}
+\end{subequations}
+
+Then the probability current is given by
+\begin{subequations}
+    \begin{align}
+        J_{k, \overline{k}}\pqty{x, t} &= - \frac{i \hbar}{2 m} \pqty{\chi_{k, \overline{k}}^* \pdv{\chi_{k, \overline{k}}}{x} - \chi_{k, \overline{k}} \pdv{\chi_{k, \overline{k}}^*}{x}} \\
+        &= \begin{cases}
+            \frac{\hbar k}{m} \abs{A}^2 - \frac{\hbar k}{m} \abs{B}^2, & \qfor x < 0, \\
+            \frac{\hbar \overline{k}}{m} \abs{C}^2, & \qfor x > 0.
+        \end{cases}
+    \end{align}
+\end{subequations}
