@@ -665,7 +665,7 @@ Now we look at a particle approaching a potential barrier. As a quantum particle
 \end{figure}
 
 \begin{definition}[Reflection and Transmission Coefficients]
-    The probability for the incoming particle to be reflected is given by the \term{reflection coefficient} \(R\), with
+    Let \(\psi\) be a normalisable state. The probability for the incoming particle to be reflected is given by the \term{reflection coefficient} \(R\), with
     \begin{subequations}
         \begin{equation}
             R = \lim_{t \to \plusinfty} \int_{\minusinfty}^{0} \abs{\psi\pqty{x, t}}^2 \dd{x},
@@ -701,7 +701,7 @@ for some \(U_0 > 0\), which is sketched in \autoref{fig:potential-step}.
             xmax = 2.2,
             ymin = -0.2,
             ymax = 1.3,
-            xtick = {0},
+            xtick = \empty,
             ytick = {1},
             yticklabels = {\(U_0\)},
             width = 0.7\textwidth,
@@ -726,7 +726,7 @@ In the region \(x \leq 0\), we have \(U\pqty{x} = 0\), so this solves to give
     \chi\pqty{x} = A e^{i k x} + B e^{- i k x}, \quad k^2 = \frac{2 m E}{\hbar^2}.
 \end{equation}
 
-The first term corresponds to a wave travelling to the right (the incident wave), and the second term corresponds to a wave travelling to the left (the reflected wave). They must have the same energy, but the densities of the wave \(A\) and \(B\) are allowed to differ, and in general, we expect \(B < A\) telling us that not everything is reflected.
+Note that \(k\) here is the momentum of the particle. The first term corresponds to a wave travelling to the right (the incident wave), and the second term corresponds to a wave travelling to the left (the reflected wave). They must have the same energy, but the densities of the wave \(A\) and \(B\) are allowed to differ, and in general, we expect \(B < A\) telling us that not everything is reflected.
 
 In the region where \(x > 0\), we have \(U\pqty{x} = U_0\), so this solves to give
 \begin{equation}
@@ -767,3 +767,153 @@ Then the probability current is given by
         \end{cases}
     \end{align}
 \end{subequations}
+
+Therefore, the incident and reflected/transmitted probability currents are given by
+\begin{subequations}
+    \begin{align}
+        J_{\incident} &= \frac{\hbar k}{m} \abs{A}^2, \\
+        J_{\reflected} &= \frac{\hbar k}{m} \abs{B}^2, \\
+        J_{\transmitted} &= \frac{\hbar \overline{k}}{m} \abs{C}^2.
+    \end{align}
+\end{subequations}
+
+In this case, we define the \term{reflection coefficient} \(R\) and the \term{transmission coefficient} \(T\) to be
+\begin{subequations}
+    \begin{align}
+        R &= \frac{J_{\reflected}}{J_{\incident}} = \frac{\abs{B}^2}{\abs{A}^2} = \pqty{\frac{k - \overline{k}}{k + \overline{k}}}^2, \\
+        T &= \frac{J_{\transmitted}}{J_{\incident}} = \frac{\overline{k}}{k} \frac{\abs{C}^2}{\abs{A}^2} = \frac{4 k \overline{k}}{\abs{k + \overline{k}}^2}.
+    \end{align}
+\end{subequations}
+
+We have \(R + T = 1\), so the number of particles is conserved. In the limiting behaviour:
+\begin{itemize}
+    \item If \(E \to U_0^+\), we have \(\overline{k} \to 0\), and hence \(R \to 1\) and \(T \to 0\). This is expected as the particle has just enough energy to reach the top of the potential barrier, so it is fully reflected.
+    \item If \(E \to \infty\), we have \(k \to \infty\) and \(\overline{k} \to \infty\), and hence \(R \to 0\) and \(T \to 1\). This is expected as the particle has so much energy that the potential barrier is negligible, so it is fully transmitted.
+\end{itemize}
+
+Now we look at the solution for \(E < U_0\), we denote
+\begin{equation}
+    \eta = \sqrt{\frac{2m \pqty{U_0 - E}}{\hbar^2}} = i \overline{k},
+\end{equation}
+then the solution is given by
+\begin{equation}
+    \xi_{k, \overline{k}} \pqty{x} = \begin{cases}
+        A e^{i k x} + B e^{- i k x}, & \qfor x < 0, \\
+        C e^{- \eta x}, & \qfor x > 0,
+    \end{cases}
+\end{equation}
+where the \(e^{\eta x}\) term vanishes since it would diverge at infinity, as discussed before. Note further that the momentum is imaginary here. Unlike a classical particle, there is some non-negligible probability for the particle to be found in the classically forbidden region \(x > 0\), but it will decay exponentially as \(x \to \plusinfty\). This is precisely the meaning of an imaginary momentum -- that a particle can exist in a region where it would be classically forbidden. This is known as an \term{evanescent wave}.
+
+A wavefunction that drops off exponentially has probability current \(0\), and hence \(J_{\transmitted} = 0\), hence \(R = 1\) and \(T = 0\). Luckily, this matches the solution we get as \(E \to U_0^+\).
+
+\subsection{Scattering off a Potential Barrier}
+
+Let the potential barrier be given by
+\begin{equation}
+    U\pqty{x} = \begin{cases}
+        0, & \qfor x < 0, \\
+        U_0, & \qfor 0 \leq x \leq a, \\
+        0, & \qfor x > a,
+    \end{cases}
+\end{equation}
+for some \(U_0 > 0\) and \(a > 0\), which is sketched in \autoref{fig:potential-barrier}.
+
+\begin{figure}[ht!]
+        \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = \(x\),
+            ylabel = \(U\pqty{x}\),
+            xmin = -2.2,
+            xmax = 2.2,
+            ymin = -0.2,
+            ymax = 1.3,
+            xtick = {1},
+            xticklabels = {\(a\)},
+            ytick = {1},
+            yticklabels = {\(U_0\)},
+            width = 0.7\textwidth,
+            height = 0.35\textwidth,
+        ]
+            \addplot[blue, very thick] coordinates { (-2, 0) (0, 0) };
+            \addplot[blue, very thick, dashed] coordinates { (0, 0) (0, 1) };
+            \addplot[blue, very thick] coordinates { (0, 1) (1, 1) };
+            \addplot[blue, very thick, dashed] coordinates { (1, 1) (1, 0) };
+            \addplot[blue, very thick] coordinates { (1, 0) (2, 0) };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Potential Barrier}
+    \label{fig:potential-barrier}%
+\end{figure}
+we study the case \(0 < E < U_0\), which means that a classical particle will simply bounce back.
+
+Let
+\begin{equation}
+    k = \sqrt{\frac{2 m E}{\hbar^2}} \qand \eta = \sqrt{\frac{2 m \pqty{U_0 - E}}{\hbar^2}},
+\end{equation}
+then the form of a solution we seek is
+\begin{equation}
+    \chi_{k, \eta} \pqty{x} = \begin{cases}
+        e^{i k x} + A e^{- i k x}, & \qfor x < 0, \\
+        B e^{\eta x} + C e^{- \eta x}, & \qfor 0 < x < a, \\
+        D e^{i k x}, & \qfor x > a.
+    \end{cases}
+\end{equation}
+
+This is of the correct form, since we have four coefficients, and four boundary conditions to impose: the continuity of \(\chi\) and \(\chi'\) at \(x = 0\) and \(x = a\). This gives us the following system of equations. This gives the system of equations
+\begin{subequations}
+    \begin{align}
+        1 + A &= B + C && \text{continuity of } \chi \text{ at } x = 0, \\
+        i k \pqty{1 - A} &= \eta \pqty{B - C}, && \text{continuity of } \chi' \text{ at } x = 0, \\
+        B e^{\eta a} + C e^{- \eta a} &= D e^{i k a}, && \text{continuity of } \chi \text{ at } x = a, \\
+        \eta \pqty{B e^{\eta a} - C e^{- \eta a}} &= i k D e^{i k a}. && \text{continuity of } \chi' \text{ at } x = a.
+    \end{align}
+\end{subequations}
+
+When we solve this, we will obtain that
+\begin{equation}
+    D = - \frac{4 i \eta k}{\pqty{k - i \eta}^2 \exp\pqty{\eta a + i k a} - \pqty{k + i \eta}^2 e^{- \eta a + i k a}}.
+\end{equation}
+
+Hence, we obtain the transmission probability
+\begin{equation}
+    T = \frac{4 k^2 \eta^2}{4 k^2 \eta^2 + \pqty{k^2 + \eta^2}^2 \sinh^2\pqty{\eta a}}.
+\end{equation}
+
+There is a non-vanishing probability that the particle tunnel through, which is known as the \term{quantum tunnelling effect}. This is a purely quantum mechanical effect, and has no classical analogue.
+
+We look at the case of a lower energy particle with \(E \ll U_0\), we have \(\eta a \gg 1\). The hyperbolic sine function dominates, and we have
+\begin{equation}
+    T \approx \frac{16 k^2 \eta^2}{\pqty{k^2 + \eta^2}^2} \exp\pqty{- 2 \eta a}.
+\end{equation}
+
+\subsection*{Summary on Unbounded States}
+
+The de Broglie wave solution is a solution to the time-dependent Schr\"{o}dinger equation and is given by
+\begin{equation}
+    \psi_k\pqty{x, t} = e^{i k x - i \flatfrac{\hbar k^2}{2 m} t} \notin \hilbertSpace.
+\end{equation}
+
+We explored two ways of resolving this.
+
+\begin{itemize}
+    \item We may build a linear combination of these solutions to form a normalisable solution, for example, the Gaussian wavepacket:
+    \begin{subequations}
+        \begin{align}
+            \psi_{\text{GP}} \pqty{x, t} &= \int_{\minusinfty}^{\plusinfty} A_{\text{GP}}\pqty{k} \psi_k \pqty{x, t} \dd{k}, \\
+            A_{\text{GP}}\pqty{k} &= \exp\pqty{- \frac{\pqty{k - k_0}^2}{2 \sigma^2} + \frac{k_0^2}{2 \sigma^2}}, \\
+            R &= \lim_{t \to \plusinfty} \int_{\minusinfty}^{0} \abs{\psi\pqty{x, t}}^2 \dd{x}, \\
+            T &= \lim_{t \to \plusinfty} \int_{0}^{\plusinfty} \abs{\psi\pqty{x, t}}^2 \dd{x}.
+        \end{align}
+    \end{subequations}
+
+    \item we may interpret this as a beam of particles:
+    \begin{subequations}
+        \begin{align}
+            J\pqty{x, t} &= - \frac{i \hbar}{2 m} \pqty{\psi^* \pdv{\psi}{x} - \psi \pdv{\psi^*}{x}}, \\
+            R &= \frac{J_{\reflected}}{J_{\incident}}, \\
+            T &= \frac{J_{\transmitted}}{J_{\incident}}.
+        \end{align}
+    \end{subequations}
+\end{itemize}

@@ -1,1 +1,75 @@
 \section{Simultaneous Measurements in Quantum Mechanics}
+
+\subsection{Commutator}
+
+\begin{definition}[Commutator]
+    The commutator of two operators \(\hat{A}\) and \(\hat{B}\) is defined as
+    \begin{equation}
+        \comm{\hat{A}}{\hat{B}} = \hat{A}\hat{B} - \hat{B}\hat{A}.
+    \end{equation}
+\end{definition}
+
+\begin{proposition}[Properties of Commutators]
+    We have the following.
+
+    \begin{itemize}
+        \item \textbf{Antisymmetry.} \(\comm{\hat{A}}{\hat{B}} = -\comm{\hat{B}}{\hat{A}}\).
+        \item \textbf{Self-vanishing.} \(\comm{\hat{A}}{\hat{A}} = 0\).
+        \item \textbf{Product Rule.} \(\comm{\hat{A}}{\hat{B}\hat{C}} = \comm{\hat{A}}{\hat{B}}\hat{C} + \hat{B}\comm{\hat{A}}{\hat{C}}\) and \(\comm{\hat{A}\hat{B}}{\hat{C}} = \hat{A}\comm{\hat{B}}{\hat{C}} + \comm{\hat{A}}{\hat{C}}\hat{B}\).
+        \item \textbf{Bilinearity.} \(\comm{\hat{A}}{\hat{B} + \hat{C}} = \comm{\hat{A}}{\hat{B}} + \comm{\hat{A}}{\hat{C}}\) and \(\comm{\hat{A} + \hat{B}}{\hat{C}} = \comm{\hat{A}}{\hat{C}} + \comm{\hat{B}}{\hat{C}}\).
+        \item \textbf{Hermitian Conjugate.} \(\comm{\hat{A}}{\hat{B}}\hermitian = \comm{\hat{B}\hermitian}{\hat{A}\hermitian}\).
+    \end{itemize}
+\end{proposition}
+
+\begin{proposition}[Canonical Commutation Relation]
+    The canonical commutation relation between the position operator \(\hat{x}\) and the momentum operator \(\hat{p}\) is given by
+    \begin{equation}
+        \comm{\hat{x}}{\hat{p}} = i\hbar.
+    \end{equation}
+\end{proposition}
+
+\begin{remark}
+    We abused the notation here -- technically this is \(i \hbar \hat{I}\), where \(\hat{I}\) is the identity operator. We will often omit the identity operator in our notation, for example, we write \(\hat{x} = x\) instead of \(\hat{x} = x \hat{I}\).
+\end{remark}
+
+\begin{proof}
+    Take \(\psi \in \hilbertSpace\) and compute
+    \begin{subequations}
+        \begin{align}
+            \hat{x} \hat{p} \psi &= x \pqty{i \hbar \pdv{x}} \psi = - i \hbar x \pdv{\psi}{x}, \\
+            \hat{p} \hat{x} \psi &= - i \hbar \pdv{x} \pqty{x \psi} = - i \hbar \psi - i \hbar x \pdv{\psi}{x}.
+        \end{align}
+    \end{subequations}
+
+    Subtracting the two equations gives us the result as desired.
+\end{proof}
+
+\begin{definition}[Simultaneous Diagonalisability]
+    Two Hermitian operators \(\hat{A}\) and \(\hat{B}\) are said to be simultaneously diagonalisable in \(\hilbertSpace\), if there exists a complete basis of joint eigenvectors \(\Bqty{\psi_i}\) such that there are eigenvalues \(a_i\) and \(b_i\) such that
+    \begin{subequations}
+        \begin{align}
+            \hat{A} \psi_i &= a_i \psi_i, \\
+            \hat{B} \psi_i &= b_i \psi_i.
+        \end{align}
+    \end{subequations}
+\end{definition}
+
+\begin{theorem}[Simultaneous Diagonalisation is Equivalent to Commutativity]
+    Two Hermitian operators \(\hat{A}\) and \(\hat{B}\) are simultaneously diagonalizable if and only if they commute, i.e. \(\comm{\hat{A}}{\hat{B}} = 0\).
+\end{theorem}
+
+\begin{proof}
+    Suppose \(\hat{A}\) and \(\hat{B}\) are simultaneously diagonalizable. Then there exists a complete basis of joint eigenvectors \(\Bqty{\psi_i}\) for \(\hilbertSpace\). Then for all \(\psi_i\), we have
+    \begin{equation}
+        \comm{\hat{A}}{\hat{B}} \psi_i = \hat{A} \hat{B} \psi_i - \hat{B} \hat{A} \psi_i = a_i b_i \psi_i - b_i a_i \psi_i = 0.
+    \end{equation}
+
+    Therefore, since any \(\psi \in \hilbertSpace\) can be expressed as a linear combination of the basis vectors, we have \(\comm{\hat{A}}{\hat{B}} = 0\).
+
+    Now, suppose \(\hat{A}\) and \(\hat{B}\) commute. Suppose \(\psi_i\) is an eigenfunction of \(\hat{A}\) with eigenvalue \(a_i\). Then we have
+    \begin{equation}
+        \hat{A} \hat{B} \psi_i = \hat{B} \hat{A} \psi_i = a_i \hat{B} \psi_i.
+    \end{equation}
+
+    Therefore, \(\hat{B} \psi_i\) is also an eigenfunction of \(\hat{A}\) with the same eigenvalue \(a_i\). In other words, the restriction \(\rightbar{\hat{B}}_{E_i}\), where \(E_i\) is the eigenspace of \(\hat{A}\) corresponding to the eigenvalue \(a_i\), is well-defined and maps \(E_i\) to \(E_i\). This holds for all eigenspaces \(E_i\) of \(\hat{A}\), so we can find a complete basis of joint eigenfunctions of \(\hat{A}\) and \(\hat{B}\).
+\end{proof}
