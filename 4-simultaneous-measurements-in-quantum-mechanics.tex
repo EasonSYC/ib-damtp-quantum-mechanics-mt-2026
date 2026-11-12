@@ -2,10 +2,15 @@
 
 \subsection{Commutator}
 
-\begin{definition}[Commutator]
-    The commutator of two operators \(\hat{A}\) and \(\hat{B}\) is defined as
+\begin{definition}[Commutator, Anticommutator]
+    The \term{commutator} of two operators \(\hat{A}\) and \(\hat{B}\) is defined as
     \begin{equation}
         \comm{\hat{A}}{\hat{B}} = \hat{A}\hat{B} - \hat{B}\hat{A}.
+    \end{equation}
+
+    The \term{anticommutator} of two operators \(\hat{A}\) and \(\hat{B}\) is defined as
+    \begin{equation}
+        \acomm{\hat{A}}{\hat{B}} = \hat{A}\hat{B} + \hat{B}\hat{A}.
     \end{equation}
 \end{definition}
 
@@ -73,3 +78,179 @@
 
     Therefore, \(\hat{B} \psi_i\) is also an eigenfunction of \(\hat{A}\) with the same eigenvalue \(a_i\). In other words, the restriction \(\rightbar{\hat{B}}_{E_i}\), where \(E_i\) is the eigenspace of \(\hat{A}\) corresponding to the eigenvalue \(a_i\), is well-defined and maps \(E_i\) to \(E_i\). This holds for all eigenspaces \(E_i\) of \(\hat{A}\), so we can find a complete basis of joint eigenfunctions of \(\hat{A}\) and \(\hat{B}\).
 \end{proof}
+
+\subsection{Heisenberg Uncertainty Principle}
+
+\begin{definition}
+    The \term{uncertainty} in the measurement of an observable on a state \(\psi\) is defined by \(\Delta_\psi A = \sqrt{\pqty{\Delta_\psi A}^2}\), where
+    \[
+        \pqty{\Delta_\psi A}^2 = \ev{\pqty{\hat{A} - \ev{\hat{A}}_\psi}}_\psi = \ev{\hat{A}^2}_\psi - \ev{\hat{A}}_\psi^2.
+    \]
+\end{definition}
+
+These two definitions are indeed equivalent, since
+\begin{subequations}
+    \begin{align}
+        \ev{\pqty{\hat{A} - \ev{\hat{A}}_\psi}}_\psi &= \ev{\hat{A}^2 - 2 \ev{\hat{A}}_\psi \hat{A} + \ev{\hat{A}}_\psi^2}_\psi \\
+        &= \ev{\hat{A}^2}_\psi - 2 \ev{\hat{A}}_\psi^2 + \ev{\hat{A}}_\psi^2 \\
+        &= \ev{\hat{A}^2}_\psi - \ev{\hat{A}}_\psi^2.
+    \end{align}
+\end{subequations}
+
+\begin{lemma}[Uncertainty is Non-Negative]
+    We have \(\pqty{\Delta_\psi A}^2 \geq 0\), and \(\Delta_\psi A = 0\) if and only if \(\psi\) is an eigenstate of \(\hat{A}\).
+\end{lemma}
+
+\begin{proof}
+    First, note that
+    \begin{subequations}
+        \begin{align}
+            \pqty{\Delta_\psi A}^2 &= \pqty{\psi, \pqty{\hat{A} - \ev{\hat{A}}_\psi}^2 \psi} \\
+            &= \pqty{\pqty{\hat{A} - \ev{\hat{A}}_\psi} \psi, \pqty{\hat{A} - \ev{\hat{A}}_\psi} \psi} \\
+            &= \norm{\pqty{\hat{A} - \ev{\hat{A}}_\psi} \psi}^2 \geq 0.
+        \end{align}
+    \end{subequations}
+
+    Denote \(\phi = \pqty{\hat{A} - \ev{\hat{A}}_\psi} \psi\). Then if the uncertainty is zero, we have \(\norm{\phi}^2 = 0\), which implies \(\phi = 0\). Therefore, we have
+    \begin{equation}
+        \hat{A} \psi = \ev{\hat{A}}_\psi \psi,
+    \end{equation}
+    which means that \(\psi\) is an eigenstate of \(\hat{A}\) with eigenvalue \(\ev{\hat{A}}_\psi\).
+    
+    Conversely, if \(\psi\) is an eigenstate of \(\hat{A}\) with eigenvalue \(a\), then we have
+    \begin{subequations}
+        \begin{align}
+            \ev{\hat{A}}_{\psi} &= \pqty{\psi, \hat{A} \psi} = a, \\
+            \ev{\hat{A}^2}_{\psi} &= \pqty{\psi, \hat{A}^2 \psi} = a^2,
+        \end{align}
+    \end{subequations}
+    so \(\pqty{\Delta_\psi A}^2 = a^2 - a^2 = 0\) indeed.
+\end{proof}
+
+\begin{lemma}[Cauchy--Schwarz Inequality]
+    For \(\psi, \phi \in \hilbertSpace\), we have
+    \begin{equation}
+        \abs{\pqty{\psi, \phi}}^2 \leq \norm{\psi}^2 \norm{\phi}^2,
+    \end{equation}
+    with equality if and only if \(\psi\) and \(\phi\) differ by a phase change \(\phi = e^{i \alpha} \psi\) for some \(\alpha \in \RR\).
+\end{lemma}
+
+\begin{proof}
+    This is the Cauchy--Schwarz inequality for integration.
+\end{proof}
+
+With this, we are ready to prove a fundamental result in quantum mechanics, the generalised uncertainty principle.
+
+\begin{theorem}[Generalised Uncertainty Principle]
+    Let \(\hat{A}\) and \(\hat{B}\) be two Hermitian operators. Then for any state \(\psi \in \hilbertSpace\), we have
+    \begin{equation}
+        \Delta_\psi A \Delta_\psi B \geq \frac{1}{2} \abs{\ev{\comm{\hat{A}}{\hat{B}}}_\psi}.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    Denote
+    \begin{subequations}
+        \begin{align}
+            \hat{A}' &= \hat{A} - \ev{\hat{A}}_\psi, \\
+            \hat{B}' &= \hat{B} - \ev{\hat{B}}_\psi.
+        \end{align}
+    \end{subequations}
+
+    Then we have
+    \begin{subequations}
+        \begin{align}
+            \pqty{\Delta_\psi A}^2 \pqty{\Delta_\psi B}^2 &= \ev{\hat{A}'^2}_\psi \ev{\hat{B}'^2}_\psi \\
+            &\geq \abs{\ev{\hat{A}' \hat{B}'}_\psi}^2 \\
+            &= \abs{\pqty{\psi, \hat{A}' \hat{B}' \psi}}^2.
+        \end{align}
+    \end{subequations}
+
+    Note that we have
+    \begin{equation}
+        \hat{A}' \hat{B}' = \frac{1}{2} \pqty{\acomm{\hat{A}'}{\hat{B}'} + \comm{\hat{A}'}{\hat{B}'}},
+    \end{equation}
+    and hence substituting this back in gives
+    \begin{equation}
+        \pqty{\Delta_\psi A}^2 \pqty{\Delta_\psi B}^2 \geq \frac{1}{4} \abs{\ev{\acomm{\hat{A}'}{\hat{B}'}}_\psi + \ev{\comm{\hat{A}'}{\hat{B}'}}_\psi}^2.
+    \end{equation}
+
+    Note that the expectation of the anti-commutator is real, while the expectation of the commutator is purely imaginary. Therefore, we have
+    \begin{equation}
+        \pqty{\Delta_\psi A}^2 \pqty{\Delta_\psi B}^2 \geq \frac{1}{4} \abs{\ev{\comm{\hat{A}'}{\hat{B}'}}_\psi}^2 = \frac{1}{4} \abs{\ev{\comm{\hat{A}}{\hat{B}}}_\psi}^2,
+    \end{equation}
+    since the commutator of \(\hat{A}'\) and \(\hat{B}'\) is the same as the commutator of \(\hat{A}\) and \(\hat{B}\). Taking square roots gives the desired result.
+\end{proof}
+
+There are several important physical consequences as this.
+
+\begin{itemize}
+    \item Taking the operators as \(\hat{x}\) and \(\hat{p}\), we have the \term{Heisenberg Uncertainty Principle}: since \(\comm{\hat{x}}{\hat{p}} = i \hbar\), we have
+    \begin{equation}
+        \pqty{\Delta_\psi x} \pqty{\Delta_\psi p} \geq \frac{\hbar}{2}.
+    \end{equation}
+
+    \item If \(\comm{\hat{A}}{\hat{B}} = 0\), then we have \(\Delta_\psi A \Delta_\psi B \geq 0\). This means that if two operators commute, then they can be simultaneously measured with arbitrary precision, for any state \(\psi\).
+    \item For a Gaussian wavepacket, we have \(\Delta_\psi x \Delta_\psi p = \frac{\hbar}{2}\) at time \(t = 0\), which is the minimal uncertainty allowed by the Heisenberg uncertainty principle.
+    
+    In fact, \(\psi\) is a state of minimal uncertainty (for momentum and position), if and only if \(\hat{x} \psi = i a \hat{p} \psi\) for some \(a \in \RR\). The condition for this to hold is \(\psi = c e^{- b x^2}\) for somce \(c \in \CC\) and \(b \in \RR^+\). This is a Gaussian.
+
+    \item If we have the de Broglie plane wave \(\psi = e^{i k x} e^{- \flatfrac{i \hbar k^2 t}{2m}}\), then we have \(\Delta_\psi p = 0\) and \(\Delta_\psi x = \infty\).
+\end{itemize}
+
+\subsection{Ehrenfest's Theorem}
+
+The Ehrenfest theorem describes how an expected value evolves over time.
+
+\begin{theorem}[Ehrenfest's Theorem]
+    Let \(\hat{A}\) be a Hermitian operator. Then we have
+    \begin{equation}
+        \dv{t} \ev{\hat{A}}_\psi = \frac{i}{\hbar} \ev{\comm{\hat{H}}{\hat{A}}}_\psi + \ev{\pdv{\hat{A}}{t}}_\psi.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    We have
+    \begin{subequations}
+        \begin{align}
+            \dv{t} \ev{\hat{A}}_\psi &= \dv{t} \pqty{\psi, \hat{A} \psi} \\
+            &= \pqty{\pdv{\psi}{t}, \hat{A} \psi} + \pqty{\psi, \pdv{\hat{A}}{t} \psi} + \pqty{\psi, \hat{A} \pdv{\psi}{t}}.
+        \end{align}
+    \end{subequations}
+
+    The middle term is precisely \(\ev{\pdv*{\hat{A}}{t}}_\psi\). For the first and last terms, we can use the Schrödinger equation to write
+    \begin{equation}
+        \pdv{\psi}{t} = - \frac{i}{\hbar} \hat{H} \psi,
+    \end{equation}
+    and hence
+    \begin{subequations}
+        \begin{align}
+            \pqty{\pdv{\psi}{t}, \hat{A} \psi} &= - \frac{i}{\hbar} \pqty{\hat{H} \psi, \hat{A} \psi} = - \frac{i}{\hbar} \pqty{\psi, \hat{H} \hat{A} \psi} = - \frac{i}{\hbar} \ev{\hat{H} \hat{A}}_\psi, \\
+            \pqty{\psi, \hat{A} \pdv{\psi}{t}} &= - \frac{i}{\hbar} \pqty{\psi, \hat{A} \hat{H} \psi} = - \frac{i}{\hbar} \ev{\hat{A} \hat{H}}_\psi.
+        \end{align}
+    \end{subequations}
+
+    Hence,
+    \begin{subequations}
+        \begin{align}
+            \dv{t} \ev{\hat{A}}_\psi &= - \frac{i}{h} \ev{\hat{H} \hat{A}}_\psi - \frac{i}{\hbar} \ev{\hat{A} \hat{H}}_\psi + \ev{\pdv{\hat{A}}{t}}_\psi \\
+            &= \frac{i}{\hbar} \ev{\comm{\hat{H}}{\hat{A}}}_\psi + \ev{\pdv{\hat{A}}{t}}_\psi.
+        \end{align}
+    \end{subequations}
+\end{proof}
+
+\begin{example}[Applications of Ehrenfest's Theorem]
+    \begin{itemize}
+        \item Take \(\hat{A} = \hat{H}\). Then \(\dv*{E}{t} = 0\) gives the conservation of energy.
+        \item Take \(\hat{A} = \hat{p}\). Then
+        \begin{equation}
+            \dv{t} \ev{\hat{p}}_\psi = - \ev{\dv{U}{x}}_\psi,
+        \end{equation}
+        which is the quantum analogue of Newton's second law.
+        \item Take \(\hat{A} = \hat{x}\). Then
+        \begin{equation}
+            \dv{t} \ev{\hat{x}}_\psi = \frac{1}{m} \ev{\hat{p}}_\psi,
+        \end{equation}
+        which is the quantum analogue of the classical relation between position and momentum.
+    \end{itemize}
+\end{example}
