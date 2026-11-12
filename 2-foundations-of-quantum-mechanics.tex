@@ -9,7 +9,7 @@ We start with an overview of corresponding ideas between linear algebra and quan
         \hline
         Vector (\(n\)-dimensional complex vector space) & State (\(\infty\)-dimensional vector space) \\
         \(\vb{v}, \vb{w}, \ldots\) & \(\psi, \phi, \ldots\) \\
-        Discrete Basis \(\{\vb{e}_i\}_{i=1}^n\) & Continuous Basis \(\Bqty{\vb{x}}_{\vb{x} \in \RR^3}\) \\
+        Discrete Basis \(\{\vb{e}_i\}_{i=1}^n\) & Continuous Basis \(\set{\vb{x}}_{\vb{x} \in \RR^3}\) \\
         Described using \(\vb{v} \mapsto \pmqty{v_1 \\ \vdots \\ v_n}\) & Described using \(\vb{x} \mapsto \psi\pqty{\vb{x}, t}\) \\
         Denoted \(\CC^n\) & Denoted \(L^2\pqty{\RR^3}\) \\
         Inner Product \(\pqty{\vb{v}, \vb{w}} = \sum_{i=1}^n {v_i\conjstar} w_i\) & Inner Product \(\pqty{\psi, \phi} = \int_{\RR^3} \dd[3]{\vb{x}} \psi\conjstar \pqty{\vb{x}, t} \phi\pqty{\vb{x}, t}\) \\
@@ -177,7 +177,7 @@ for any \(\lambda \in \CC\) with \(\lambda \neq 0\), combining the normalisation
 \end{definition}
 
 \begin{definition}[Orthonormal Set of Wavefunctions]
-    A set of wavefunctions \(\Bqty{\psi_n}\) is \term{orthonormal} if
+    A set of wavefunctions \(\set{\psi_n}\) is \term{orthonormal} if
     \begin{equation}
         \pqty{\psi_m, \psi_n} = \kronecker_{mn} = \begin{cases}
             1, & m = n, \\
@@ -187,14 +187,14 @@ for any \(\lambda \in \CC\) with \(\lambda \neq 0\), combining the normalisation
 \end{definition}
 
 \begin{definition}[Complete Set of Wavefunctions]
-    A set of wavefunctions \(\Bqty{\psi_n}\) is \term{complete} if any wavefunction \(\psi\) can be expressed as a linear combination of the set, i.e., for all \(\psi \in \hilbertSpace\), there exists a set of constants \(c_n \in \CC\) such that
+    A set of wavefunctions \(\set{\psi_n}\) is \term{complete} if any wavefunction \(\psi\) can be expressed as a linear combination of the set, i.e., for all \(\psi \in \hilbertSpace\), there exists a set of constants \(c_n \in \CC\) such that
     \begin{equation}
         \psi = \sum_n c_n \psi_n.
     \end{equation}
 \end{definition}
 
 \begin{lemma}[Coefficients of Linear Combination]
-    If a set of wavefunctions \(\Bqty{\psi_n}\) forms a complete and orthonormal basis of \(\hilbertSpace\), then the coefficients are given by
+    If a set of wavefunctions \(\set{\psi_n}\) forms a complete and orthonormal basis of \(\hilbertSpace\), then the coefficients are given by
     \begin{equation}
         c_n = \pqty{\psi_n, \psi}.
     \end{equation}
@@ -477,13 +477,13 @@ The Copenhagen interpretation postulates that observables correspond to Hermitia
 \begin{enumerate}
     \item The eigenvalues of \(\hat{O}\) are the possible outcomes of a measurement of the observable \(O\).
     
-    \item If \(\hat{O}\) has a discrete set of normalised eigenfunctions \(\Bqty{\psi_i}\) with distinct eigenvalues \(\Bqty{\lambda_i}\), then the measurement of \(O\) obeys a \term{probability distribution} as
+    \item If \(\hat{O}\) has a discrete set of normalised eigenfunctions \(\set{\psi_i}\) with distinct eigenvalues \(\set{\lambda_i}\), then the measurement of \(O\) obeys a \term{probability distribution} as
     \begin{equation}
         \Prob\pqty{O = \lambda_i} = \abs{a_i}^2 = \abs{\pqty{\psi_i, \psi}}^2,
     \end{equation}
     where \(\psi\) is a normalised state, written as \(\psi = \sum_{i = 0}^{\infty} a_i \psi_i\).
 
-    \item If \(\Bqty{\psi_i}\) is an orthonormal set of eigenfunctions of \(\hat{O}\), and \(\Bqty{\psi_j}_{j \in J}\) is a subset of this with expected value \(\lambda\), then we have
+    \item If \(\set{\psi_i}\) is an orthonormal set of eigenfunctions of \(\hat{O}\), and \(\set{\psi_j}_{j \in J}\) is a subset of this with expected value \(\lambda\), then we have
     \begin{equation}
         \Prob\pqty{O = \lambda} = \sum_{j \in J} \abs{a_j}^2 = \sum_{j \in J} \abs{\pqty{\psi_j, \psi}}^2
     \end{equation}
