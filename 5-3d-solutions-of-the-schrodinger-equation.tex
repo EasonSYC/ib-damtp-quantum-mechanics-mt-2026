@@ -1,1 +1,63 @@
 \section{3D Solutions of the Schr\"{o}dinger Equation}
+
+We look at the time-independent Schr\"{o}dinger equation in three dimensions:
+\begin{equation}
+ -\frac{\hbar^2}{2m}\laplacian\psi\pqty{\vb{x}} + U\pqty{\vb{x}}\psi(\vb{x}) = E\psi\pqty{\vb{x}}.
+\end{equation}
+
+In this course, we deal with spherically symmetric potentials of the form \(U = U\pqty{r}\). In general, even if the potential is spherically symmetric, the wavefunction \(\psi\) may still depend on the spacial orientation (as we will see in the case of the hydrogen atom -- this is where the interesting behaviour occurs).
+
+\subsection{Angular Momentum Operator}
+
+\begin{definition}[Angular Momentum Operator]
+    The \term{angular momentum operator} is defined as
+    \begin{equation}
+        \hat{\vb{L}} = \hat{\vb{x}} \cross \hat{\vb{p}} = -i \hbar \vb{x} \cross \grad.
+    \end{equation}
+\end{definition}
+
+In Cartesian coordinates in three dimensions, we have
+\begin{equation}
+    \hat{L}_i = \levicivita_{ijk} \hat{x}_j \hat{p}_k =  - i \hbar \levicivita_{ijk} x_j \pdv{x_k}.
+\end{equation}
+
+\begin{proposition}[Properties of the angular Momentum Operator]
+    We have the following.
+
+    \begin{itemize}
+        \item The angular momentum operator and its components are Hermitian.
+        \item \(\comm{\hat{L}_i}{\hat{L}_j} = i\hbar \levicivita_{ijk} \hat{L}_k\).
+    \end{itemize}
+\end{proposition}
+
+\begin{proof}
+    \textbf{\textcolor{red}{See Example Sheet.}}
+
+    We note that by some algebra, for the case \(i = 1\) and \(j = 2\), we have
+    \begin{subequations}
+        \begin{align}
+            \comm{\hat{L}_1}{\hat{L}_2} \chi &= - \hbar^2 \bqty{\pqty{x_2 \pdv{x_3} - x_3 \pdv{x_2}}\pqty{x_3 \pdv{x_1} - x_1 \pdv{x_3}} - \pqty{x_3 \pdv{x_1} - x_1 \pdv{x_3}}\pqty{x_2 \pdv{x_3} - x_3 \pdv{x_2}}}\chi\\
+            &= - \hbar^2 \pqty{x_2 \pdv{x_1} - x_1 \pdv{x_2}} \chi \\
+            &= i \hbar \hat{L}_3 \chi.
+        \end{align}
+    \end{subequations}
+
+    The other components are similar.
+\end{proof}
+
+\begin{definition}[Total Angular Momentum Operator]
+    The \term{total angular momentum operator} is defined as
+    \begin{equation}
+        \hat{L}^2 = \hat{L}_1^2 + \hat{L}_2^2 + \hat{L}_3^2.
+    \end{equation}
+\end{definition}
+
+We may show that \(\comm{\hat{L}^2}{\hat{L}_i} = 0\) for \(i = 1,2,3\). This is an interesting result: although we cannot simultaneously measure the components of angular momentum, we can simultaneously measure the total angular momentum and one of its components. In particular, it will be useful to measure \(\hat{L}^2\) and \(\hat{L}_3\) simultaneously.
+
+Writing them in spherical coordinates, we have
+\begin{subequations}
+    \begin{align}
+        \hat{L}_3 &= - i \hbar \pdv{\phi},\\
+        \hat{L}^2 &= - \frac{\hbar^2}{\sin^2 \theta} \bqty{\sin \theta \pdv{\theta} \pqty{\sin \theta \pdv{\theta}} + \pdv[2]{\phi}}.
+    \end{align}
+\end{subequations}

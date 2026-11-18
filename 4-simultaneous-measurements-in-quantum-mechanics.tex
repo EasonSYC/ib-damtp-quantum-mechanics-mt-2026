@@ -193,7 +193,23 @@ There are several important physical consequences as this.
     \item If \(\comm{\hat{A}}{\hat{B}} = 0\), then we have \(\Delta_\psi A \Delta_\psi B \geq 0\). This means that if two operators commute, then they can be simultaneously measured with arbitrary precision, for any state \(\psi\).
     \item For a Gaussian wavepacket, we have \(\Delta_\psi x \Delta_\psi p = \frac{\hbar}{2}\) at time \(t = 0\), which is the minimal uncertainty allowed by the Heisenberg uncertainty principle.
     
-    In fact, \(\psi\) is a state of minimal uncertainty (for momentum and position), if and only if \(\hat{x} \psi = i a \hat{p} \psi\) for some \(a \in \RR\). The condition for this to hold is \(\psi = c e^{- b x^2}\) for somce \(c \in \CC\) and \(b \in \RR^+\). This is a Gaussian.
+    In fact, \(\psi\) is a state of minimal uncertainty (for momentum and position), if and only if \(\hat{x} \psi = i a \hat{p} \psi\) for some \(a \in \RR\). Note we have
+    \begin{subequations}
+        \begin{align}
+            \pqty{\psi, \acomm{\hat{x}, \hat{p}} \psi} &= \pqty{\psi, \hat{x} \hat{p} \psi} + \pqty{\psi, \hat{p} \hat{x} \psi} \\
+            &= \pqty{\hat{x} \psi, \hat{p} \psi} + \pqty{\hat{p} \psi, \hat{x} \psi} \\
+            &= \pqty{2 i a \hat{p} \psi, \hat{p} \psi} + \pqty{\hat{p} \psi, 2 i a \hat{p} \psi} \\
+            &= 0,
+        \end{align}
+    \end{subequations}
+    and hence we have
+    \begin{equation}
+        \pqty{\hat{x} - \ev{\hat{x}}_\psi} \psi = i a \pqty{\hat{p} - \ev{\hat{p}}_\psi} \psi.
+    \end{equation}
+
+    From the above proof, we see that the equality in the Cauchy--Schwarz inequality holds if and only if \(\hat{x}' \psi = c \hat{p}' \psi\) for some \(c \in \CC\). In this case, take \(c = ia\) gives this equality, hence minimising the uncertainty.
+    
+    The condition for this to hold is \(\psi = c e^{- b x^2}\) for some \(c \in \CC\) and \(b \in \RR^+\). This is a Gaussian.
 
     \item If we have the de Broglie plane wave \(\psi = e^{i k x} e^{- \flatfrac{i \hbar k^2 t}{2m}}\), then we have \(\Delta_\psi p = 0\) and \(\Delta_\psi x = \infty\).
 \end{itemize}
@@ -254,3 +270,80 @@ The Ehrenfest theorem describes how an expected value evolves over time.
         which is the quantum analogue of the classical relation between position and momentum.
     \end{itemize}
 \end{example}
+
+\subsection{Harmonic Oscillator Revisited (Non-Examinable)}
+
+Recall the Hamiltonian for the harmonic oscillator is given by
+\begin{equation}
+    \hat{H} = \frac{\hat{p}^2}{2m} + \frac{1}{2} m \omega^2 \hat{x}^2,
+\end{equation}
+where \(k = m \omega^2\) is the elastic constant. We may re-write \(\hat{H}\) in terms of
+\begin{subequations}
+    \begin{align}
+        \hat{H} &= \frac{1}{2m} \pqty{\hat{p} + i m \omega \hat{x}} \pqty{\hat{p} - i m \omega \hat{x}} + \frac{i \omega}{2} \comm{\hat{p}}{\hat{x}} \\
+        &= \frac{1}{2m} \pqty{\hat{p} + i m \omega \hat{x}} \pqty{\hat{p} - i m \omega \hat{x}} + \frac{\hbar \omega}{2}.
+    \end{align}
+\end{subequations}
+
+\begin{definition}[Ladder Operators]
+    Define the \term{ladder operators} \(\hat{a}\) and \(\hat{a}\hermitian\) as
+    \begin{subequations}
+        \begin{align}
+            \hat{a} &= \frac{1}{\sqrt{2m}} \pqty{\hat{p} - i m \omega \hat{x}}, \\
+            \hat{a}\hermitian &= \frac{1}{\sqrt{2m}} \pqty{\hat{p} + i m \omega \hat{x}}.
+        \end{align}
+    \end{subequations}
+\end{definition}
+
+With this, we may re-write the Hamiltonian as
+\begin{equation}
+    \hat{H} = \hat{a}\hermitian \hat{a} + \frac{\hbar \omega}{2}.
+\end{equation}
+
+Computing the commutators, we have
+\begin{subequations}
+    \begin{align}
+        \comm{\hat{a}}{\hat{a}\hermitian} &= \frac{1}{2m} \comm{\hat{p} - i m \omega \hat{x}}{\hat{p} + i m \omega \hat{x}}  = \hbar \omega, \\
+        \comm{\hat{H}}{\hat{a}} &= \comm{\hat{a}\hermitian \hat{a}}{\hat{a}} = - \hbar \omega \hat{a}, \\
+        \comm{\hat{H}}{\hat{a}\hermitian} &= \comm{\hat{a}\hermitian \hat{a}}{\hat{a}\hermitian} = \hbar \omega \hat{a}\hermitian.
+    \end{align}
+\end{subequations}
+
+Suppose now that \(\chi\) is an eigenstate of \(\hat{H}\) with eigenvalue \(E\), i.e., \(\hat{H} \chi = E \chi\). Then considering the state \(\hat{a} \chi\), we have
+\begin{subequations}
+    \begin{align}
+        \hat{H} \pqty{\hat{a} \chi} &= \comm{\hat{H}}{\hat{a}} \chi + \hat{a} \hat{H} \chi \\
+        &= - \hbar \omega \hat{a} \chi + E \hat{a} \chi \\
+        &= \pqty{E - \hbar \omega} \hat{a} \chi,
+    \end{align}
+\end{subequations}
+which means that \(\hat{a} \chi\) is also an eigenstate of \(\hat{H}\) with eigenvalue \(E - \hbar \omega\). Similarly, we have
+\begin{equation}
+    \hat{H} \pqty{\hat{a}\hermitian \chi} = \pqty{E + \hbar \omega} \hat{a}\hermitian \chi,
+\end{equation}
+so \(\hat{a}\hermitian \chi\) is also an eigenstate of \(\hat{H}\) with eigenvalue \(E + \hbar \omega\). Continue doing this, we have \(\hat{a}^n \chi\) is an eigenstate of \(\hat{H}\) with eigenvalue \(E - n \hbar \omega\), and \(\pqty{\hat{a}\hermitian}^n \chi\) is an eigenstate of \(\hat{H}\) with eigenvalue \(E + n \hbar \omega\). Hence the name \emph{ladder} operators.
+
+But \(E \geq 0\), so we have a ground eigenstate \(\chi_0\) such that \(\hat{a} \chi_0 = 0\). Then we have
+\begin{equation}
+    \frac{1}{\sqrt{2m}} \pqty{\hat{p} - i m \omega \hat{x}} \chi_0 = 0,
+\end{equation}
+which gives
+\begin{equation}
+    - i \hbar \pdv{\chi_0}{x} - i m \omega x \chi_0 = 0,
+\end{equation}
+so
+\begin{equation}
+    \chi_0 \pqty{x} = e^{- \frac{m \omega}{2 \hbar} x^2},
+\end{equation}
+which has energy \(\flatfrac{\hbar \omega}{2}\).
+
+We now find all the eigenstates of \(\hat{H}\) by applying \(\hat{a}\hermitian\) repeatedly to \(\chi_0\):
+\begin{subequations}
+    \begin{align}
+        \chi_n &= \pqty{\hat{a}\hermitian}^n \chi_0, \\
+        &= \frac{1}{\pqty{\sqrt{2m}}^n} \pqty{\hat{p} + i m \omega \hat{x}}^n \exp\pqty{- \frac{m \omega}{2 \hbar} x^2} \\
+        &= \frac{1}{\pqty{2m}^{\flatfrac{n}{2}}} \pqty{- i \hbar \dv{x} + i m \omega x}^n \exp\pqty{- \frac{m \omega}{2 \hbar} x^2}.
+    \end{align}
+
+    This allows us to find, explicitly, the Hermite polynomials (through inductive computation) corresponding to the eigenvalues of the Hamiltonian \(E_n = \pqty{n + \frac{1}{2}} \hbar \omega\).
+\end{subequations}
