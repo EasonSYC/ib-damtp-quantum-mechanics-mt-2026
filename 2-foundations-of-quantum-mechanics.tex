@@ -4,20 +4,22 @@ We start with an overview of corresponding ideas between linear algebra and quan
 
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{c|c}
+    \begin{tabular}{cc}
+        \toprule
         Linear Algebra & Quantum Mechanics \\
-        \hline
+        \midrule
         Vector (\(n\)-dimensional complex vector space) & State (\(\infty\)-dimensional vector space) \\
         \(\vb{v}, \vb{w}, \ldots\) & \(\psi, \phi, \ldots\) \\
         Discrete Basis \(\{\vb{e}_i\}_{i=1}^n\) & Continuous Basis \(\set{\vb{x}}_{\vb{x} \in \RR^3}\) \\
         Described using \(\vb{v} \mapsto \pmqty{v_1 \\ \vdots \\ v_n}\) & Described using \(\vb{x} \mapsto \psi\pqty{\vb{x}, t}\) \\
         Denoted \(\CC^n\) & Denoted \(L^2\pqty{\RR^3}\) \\
-        Inner Product \(\pqty{\vb{v}, \vb{w}} = \sum_{i=1}^n {v_i\conjstar} w_i\) & Inner Product \(\pqty{\psi, \phi} = \int_{\RR^3} \dd[3]{\vb{x}} \psi\conjstar \pqty{\vb{x}, t} \phi\pqty{\vb{x}, t}\) \\
+        Inner Product \(\pqty{\vb{v}, \vb{w}} = \sum_{i=1}^n {v_i\conjstar} w_i\) & Inner Product \(\displaystyle \pqty{\psi, \phi} = \int_{\RR^3} \dd[3]{\vb{x}} \psi\conjstar \pqty{\vb{x}, t} \phi\pqty{\vb{x}, t}\) \\
         Linear Map \(\functiondomain{T}{\CC^n}{\CC^n}\) & Operator \(\functiondomain{\hat{O}}{L^2\pqty{\RR^3}}{L^2\pqty{\RR^3}}\) \\
         Matrix Representation \(\pmqty{T_{ij}}_{i,j=1}^n\) & Operator \(\hat{O}\) \\
         \(\vb{w} = T \vb{v}\) & \(\phi = \hat{O} \psi\) \\
+        \bottomrule
     \end{tabular}
-
+    \caption{Correspondence between Linear Algebra and Quantum Mechanics}
 \end{table}
 
 \subsection{State, Wavefunction and Probability}
