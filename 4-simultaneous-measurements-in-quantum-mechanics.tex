@@ -241,7 +241,7 @@ The Ehrenfest theorem describes how an expected value evolves over time.
     and hence
     \begin{subequations}
         \begin{align}
-            \pqty{\pdv{\psi}{t}, \hat{A} \psi} &= - \frac{i}{\hbar} \pqty{\hat{H} \psi, \hat{A} \psi} = - \frac{i}{\hbar} \pqty{\psi, \hat{H} \hat{A} \psi} = - \frac{i}{\hbar} \ev{\hat{H} \hat{A}}_\psi, \\
+            \pqty{\pdv{\psi}{t}, \hat{A} \psi} &= \frac{i}{\hbar} \pqty{\hat{H} \psi, \hat{A} \psi} = \frac{i}{\hbar} \pqty{\psi, \hat{H} \hat{A} \psi} = \frac{i}{\hbar} \ev{\hat{H} \hat{A}}_\psi, \\
             \pqty{\psi, \hat{A} \pdv{\psi}{t}} &= - \frac{i}{\hbar} \pqty{\psi, \hat{A} \hat{H} \psi} = - \frac{i}{\hbar} \ev{\hat{A} \hat{H}}_\psi.
         \end{align}
     \end{subequations}
@@ -249,7 +249,7 @@ The Ehrenfest theorem describes how an expected value evolves over time.
     Hence,
     \begin{subequations}
         \begin{align}
-            \dv{t} \ev{\hat{A}}_\psi &= - \frac{i}{h} \ev{\hat{H} \hat{A}}_\psi - \frac{i}{\hbar} \ev{\hat{A} \hat{H}}_\psi + \ev{\pdv{\hat{A}}{t}}_\psi \\
+            \dv{t} \ev{\hat{A}}_\psi &= \frac{i}{h} \ev{\hat{H} \hat{A}}_\psi - \frac{i}{\hbar} \ev{\hat{A} \hat{H}}_\psi + \ev{\pdv{\hat{A}}{t}}_\psi \\
             &= \frac{i}{\hbar} \ev{\comm{\hat{H}}{\hat{A}}}_\psi + \ev{\pdv{\hat{A}}{t}}_\psi.
         \end{align}
     \end{subequations}
