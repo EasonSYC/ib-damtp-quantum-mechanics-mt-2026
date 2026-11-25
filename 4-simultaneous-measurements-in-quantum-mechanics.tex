@@ -84,14 +84,14 @@
 \begin{definition}
     The \term{uncertainty} in the measurement of an observable on a state \(\psi\) is defined by \(\Delta_\psi A = \sqrt{\pqty{\Delta_\psi A}^2}\), where
     \[
-        \pqty{\Delta_\psi A}^2 = \ev{\pqty{\hat{A} - \ev{\hat{A}}_\psi}}_\psi = \ev{\hat{A}^2}_\psi - \ev{\hat{A}}_\psi^2.
+        \pqty{\Delta_\psi A}^2 = \ev{\pqty{\hat{A} - \ev{\hat{A}}_\psi}^2}_\psi = \ev{\hat{A}^2}_\psi - \ev{\hat{A}}_\psi^2.
     \]
 \end{definition}
 
 These two definitions are indeed equivalent, since
 \begin{subequations}
     \begin{align}
-        \ev{\pqty{\hat{A} - \ev{\hat{A}}_\psi}}_\psi &= \ev{\hat{A}^2 - 2 \ev{\hat{A}}_\psi \hat{A} + \ev{\hat{A}}_\psi^2}_\psi \\
+        \ev{\pqty{\hat{A} - \ev{\hat{A}}_\psi}^2}_\psi &= \ev{\hat{A}^2 - 2 \ev{\hat{A}}_\psi \hat{A} + \ev{\hat{A}}_\psi^2}_\psi \\
         &= \ev{\hat{A}^2}_\psi - 2 \ev{\hat{A}}_\psi^2 + \ev{\hat{A}}_\psi^2 \\
         &= \ev{\hat{A}^2}_\psi - \ev{\hat{A}}_\psi^2.
     \end{align}
